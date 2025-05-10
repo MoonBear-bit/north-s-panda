@@ -1,0 +1,179 @@
+body{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    background-color: rgb(189, 126, 10);
+}
+.Silverlongfish{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url(../Image/Silverlongfish.png);
+    background-size: 70px 70px;
+    color: white;
+    cursor: pointer;
+}
+.Blackpig{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url(../Image/Blackpig.png);
+    background-size: 70px 70px;
+    color: white;
+    cursor: pointer;
+}
+.Realdotdog{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url(../Image/Realdotdog.png);
+    background-size: 70px 70px;
+    color: white;
+    cursor: pointer;
+}
+.Twistworm{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url(../Image/Twistworm.png);
+    background-size: 70px 70px;
+    color: white;
+    cursor: pointer;
+}
+.Fiveridecoo{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url(../Image/Fiveridecoo.png);
+    background-size: 70px 70px;
+    color: white;
+    cursor: pointer;
+}
+.Whatgo{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url(../Image/Whatgo.png);
+    background-size: 70px 70px;
+    color: white;
+    cursor: pointer;
+}
+.Firebear{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url(../Image/Firebear.png);
+    background-size: 70px 70px;
+    color: white;
+    cursor: pointer;
+}
+.Northpolebear{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url(../Image/Northpolebear.png);
+    background-size: 70px 70px;
+    color: white;
+    cursor: pointer;
+}
+.world{
+    position: absolute;    
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(189, 126, 10);
+    color: white;
+    cursor: crosshair;
+}
+.StartButton{
+    position: absolute;
+    top: 45vh;
+    left: 46vw;
+    height: 8vh;
+    width: 10vw;
+    border: 5px solid black;
+    background-color: white;
+    font-size: 6vh;
+    z-index: 9999;
+}
+.popki{
+    position: absolute; 
+    opacity: 1;
+    height: 150px;
+    width: 150px;
+    left: 91vw;
+    top: 81vh;
+    background-color: black;
+    background-image: url(../Image/egg.png);
+    background-size: 150px 150px;
+    color: black;
+    font-size: 50px;
+    cursor: pointer;
+    z-index: 9999;
+}
+.egg{
+    position: absolute; 
+    height: 70px;
+    width: 70px;
+    z-index: 9999;
+}
+.gold{
+    position: absolute; 
+    opacity: 1;
+    height: 25px;
+    width: 25px;
+    background-color: black;
+    background-image: url(../Image/gold.png);
+    background-size: 25px 25px;
+    color: black;
+    font-size: 50px;
+    cursor: grab;
+}
+.tree{
+    position: absolute; 
+    opacity: 1;
+    height: 40px;
+    width: 40px;
+    background-color: black;
+    background-image: url(../Image/tree.png);
+    background-size: 40px 40px;
+    color: black;
+    font-size: 50px;
+    cursor: grab;
+}
+.tree_num{
+    position: absolute; 
+    opacity: 1;
+    height: 100px;
+    width: 100px;
+    left: 86vw;
+    top: 0vh;
+    background-color: black;
+    background-image: url(../Image/tree.png);
+    background-size: 100px 100px;
+    color: white;
+    font-size: 25px;
+    z-index: 9999;
+}
+.money{
+    position: absolute; 
+    opacity: 1;
+    height: 100px;
+    width: 100px;
+    left: 91vw;
+    top: 0vh;
+    background-color: black;
+    background-image: url(../Image/gold.png);
+    background-size: 100px 100px;
+    color: white;
+    font-size: 25px;
+    z-index: 9999;
+}
