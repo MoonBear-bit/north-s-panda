@@ -10,6 +10,8 @@ let yes=document.getElementById('yes');
 let no=document.getElementById('no');
 let taketree=document.getElementById('taketree')
 let iftaketreebutton=document.getElementById('iftaketreebutton')
+let taketree_second=document.getElementById('taketree_second')
+let iftaketreebutton_second=document.getElementById('iftaketreebutton_second')
 egg.style.display='none'
 let gold=0;
 let tree=0;
@@ -48,6 +50,8 @@ yes.style.display='none';
 no.style.display='none';
 taketree.style.display='none';
 iftaketreebutton.style.display='none';
+taketree_second.style.display='none';
+iftaketreebutton_second.style.display='none';
 let need_money=null;
 function starttutorial(){
     alert('화면에는 지렁이가 보일겁니다.');
@@ -85,6 +89,7 @@ function update(){
         tree_num.style.display='block'
         rock_num.style.display='block'
         iftaketreebutton.style.display='block';
+        iftaketreebutton_second.style.display='block';
         //taketree.style.display='block';
         gold_make();
         tree_make();
@@ -99,6 +104,13 @@ iftaketreebutton.addEventListener('click',()=>{
         taketree.style.display='none'
     }else{
         taketree.style.display='block'
+    }
+});
+iftaketreebutton_second.addEventListener('click',()=>{
+    if (taketree_second.style.display=='block'){
+        taketree_second.style.display='none'
+    }else{
+        taketree_second.style.display='block'
     }
 });
 StartButton.addEventListener('click',()=>{
@@ -346,6 +358,11 @@ function yee(){
         iftaketreebutton.style.left='50vw'
     }else{
         iftaketreebutton.style.left='0vw'
+    }
+    if (taketree_second.style.display=='block'){
+        iftaketreebutton_second.style.left='50vw'
+    }else{
+        iftaketreebutton_second.style.left='0vw'
     }
     if (follow.includes(true)){
         grass.style.cursor='crosshair';

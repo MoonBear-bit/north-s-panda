@@ -276,3 +276,26 @@ body{
     font-size: 2vh;
     z-index: 999999;
 }
+.taketree_second{
+    position: absolute;
+    top: 50vh;
+    left: 0vw;
+    width: 50vw;
+    height: 48vh;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    z-index: 999999;
+}
+.iftaketreebutton_second{
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    width: 5vw;
+    height: 5vh;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    font-size: 2vh;
+    z-index: 999999;
+}
