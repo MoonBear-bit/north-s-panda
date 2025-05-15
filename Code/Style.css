@@ -239,6 +239,7 @@ body{
     color: lawngreen;
     font-size: 25px;
     z-index: 9999999;
+    cursor: pointer;
 }
 .no{
     position: absolute; 
@@ -252,6 +253,7 @@ body{
     color: lawngreen;
     font-size: 25px;
     z-index: 9999999;
+    cursor: pointer;
 }
 .taketree{
     position: absolute;
@@ -275,6 +277,7 @@ body{
     color: lawngreen;
     font-size: 2vh;
     z-index: 999999;
+    cursor: pointer;
 }
 .taketree_second{
     position: absolute;
@@ -298,4 +301,5 @@ body{
     color: cyan;
     font-size: 2vh;
     z-index: 999999;
+    cursor: pointer;
 }
