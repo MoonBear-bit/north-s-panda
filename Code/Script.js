@@ -1,4 +1,5 @@
 let StartButton=document.getElementById('Starter');
+let credits=document.getElementById('credits')
 let popki=document.getElementById('popki');
 let egg=document.getElementById('egg');
 let grass=document.getElementById('world');
@@ -22,22 +23,25 @@ let eggsound=new Audio('Sound/egg.mp3')
 let treesound=new Audio('Sound/tree.mp3')
 let rocksound=new Audio('Sound/rock.mp3')
 let start=new Audio('Sound/system start.mp3')
+let music=new Audio('Sound/main.mp3')
+let credits_music=new Audio('Sound/credits.mp3')
 let ifstart=false;
+let ifcredits=false;
 let money=0;
 let all=[];
 let golds=[];
-let trees=[];
+let trees=[];1
 let rocks=[];
 let entity=['Northpolebear','Firebear','Whatgo','Fiveridecoo','Twistworm','Realdotdog','Blackpig','Silverlongfish'];
 let entity_all={
-    Northpolebear_all:{power:3,speed:2,get:1,create:1},
-    Firebear_all:{power:3,speed:2,get:1,create:1},
-    Whatgo_all:{power:1,speed:2,get:1,create:3},
-    Fiveridecoo_all:{power:1,speed:3,get:1,create:1},
-    Twistworm_all:{power:2,speed:2,get:2,create:2},
-    Realdotdog_all:{power:1,speed:2,get:3,create:1},
-    Blackpig_all:{power:1,speed:3,get:1,create:1},
-    Silverlongfish_all:{power:1,speed:2,get:1,create:3},
+    Northpolebear_all:{power:3,speed:1,get:1,create:1},
+    Firebear_all:{power:3,speed:1,get:1,create:1},
+    Whatgo_all:{power:1,speed:1,get:1,create:3},
+    Fiveridecoo_all:{power:1,speed:1.5,get:1,create:1},
+    Twistworm_all:{power:2,speed:1,get:2,create:2},
+    Realdotdog_all:{power:1,speed:1,get:3,create:1},
+    Blackpig_all:{power:1,speed:1.5,get:1,create:1},
+    Silverlongfish_all:{power:1,speed:1,get:1,create:3},
 }
 let follow=[];
 let name=''
@@ -83,6 +87,7 @@ function what_(name){
 function update(){
     if (ifstart){
         StartButton.style.display="none";
+        credits.style.display="none";
         create(entity[4]);
         popki.style.display='block'
         golder.style.display='block'
@@ -94,8 +99,13 @@ function update(){
         gold_make();
         tree_make();
         rock_make();
+    }else if(ifcredits){
+        StartButton.style.display="none";
+        credits.style.display="none";
+        start_credits();
     }else{
         StartButton.style.display="block";
+        credits.style.display="block";
     }
 }
 update();
@@ -114,15 +124,19 @@ iftaketreebutton_second.addEventListener('click',()=>{
     }
 });
 StartButton.addEventListener('click',()=>{
-    if (ifstart){
-        ifstart=false;
-    }else{
-        let name='튜토리얼'
-        what_(name);
-        ifstart=true;
-    }
+    let name='튜토리얼'
+    what_(name);
+    ifstart=true;
+    music.play();
     update();
 });
+credits.addEventListener('click',()=>{
+    ifcredits=true;
+    update();
+})
+music.addEventListener('ended',()=>{
+    music.play();
+})
 function __random__(){
     let random=Math.random();
     console.log(random);
@@ -167,7 +181,7 @@ function create(wt){
     forfor();
 }
 function create_gold(){
-    if (gold<20){
+    if (golds.length<20){
         let xrandom=Math.floor(Math.random()*(window.innerWidth-51));
         let yrandom=Math.floor(Math.random()*(window.innerHeight-51));
         xrandom=String(xrandom)+'px';
@@ -195,7 +209,7 @@ function create_gold(){
     
 }
 function create_tree(){
-    if (tree<10){
+    if (trees.length<10){
         let xrandom=Math.floor(Math.random()*(window.innerWidth-51));
         let yrandom=Math.floor(Math.random()*(window.innerHeight-51));
         xrandom=String(xrandom)+'px';
@@ -224,7 +238,7 @@ function create_tree(){
     
 }
 function create_rock(){
-    if (rock<10){
+    if (rocks.length<10){
         let xrandom=Math.floor(Math.random()*(window.innerWidth-51));
         let yrandom=Math.floor(Math.random()*(window.innerHeight-51));
         xrandom=String(xrandom)+'px';
@@ -319,19 +333,19 @@ function gold_make(){
     setTimeout(()=>{
         create_gold();
         gold_make();
-    },Math.floor(5000+(Math.random()*(10000-5000))))
+    },Math.floor(10000+(Math.random()*(25000-10000))))
 }
 function tree_make(){
     setTimeout(()=>{
         create_tree();
         tree_make();
-    },Math.floor(5000+(Math.random()*(10000-5000))))
+    },Math.floor(10000+(Math.random()*(25000-10000))))
 }
 function rock_make(){
     setTimeout(()=>{
         create_rock();
         rock_make();
-    },Math.floor(5000+(Math.random()*(10000-5000))))
+    },Math.floor(10000+(Math.random()*(25000-10000))))
 }
 popki.addEventListener('click',()=>{
     if (gold>=need_money){
@@ -339,17 +353,17 @@ popki.addEventListener('click',()=>{
         create(entity[__random__()]);
     }
 });
-function move(i,xx,yy,n){
-    if (follow[i]){
-        if (xx>0){
-            all[i].style.left=String(parseInt(all[i].style.left.replace('px',''))+(n-(n/3)))+"px";
-        }else if (xx<=0){
-            all[i].style.left=String(parseInt(all[i].style.left.replace('px',''))-(n-(n/3)))+"px";
+function move(i__,xxy,yyx,n_){
+    if (follow[i__]){
+        if (xxy>0){
+            all[i__].style.left=String(parseInt(all[i__].style.left.replace('px',''))+(n_))+"px";
+        }else if (xxy<0){
+            all[i__].style.left=String(parseInt(all[i__].style.left.replace('px',''))-(n_))+"px";
         }
-        if (yy>0){
-            all[i].style.top=String(parseInt(all[i].style.top.replace('px',''))+(n-(n/3)))+"px";
-        }else if (yy<=0){
-            all[i].style.top=String(parseInt(all[i].style.top.replace('px',''))-(n-(n/3)))+"px";
+        if (yyx>0){
+            all[i__].style.top=String(parseInt(all[i__].style.top.replace('px',''))+(n_))+"px";
+        }else if (yyx<0){
+            all[i__].style.top=String(parseInt(all[i__].style.top.replace('px',''))-(n_))+"px";
         }
     }
 }
@@ -386,3 +400,12 @@ function yee(){
     requestAnimationFrame(yee);
 }
 yee();
+function start_credits(){
+    credits_music.play();
+    grass.style.display='none'
+    credits_music.addEventListener('ended',()=>{
+        ifcredits=false
+        update();
+        grass.style.display='block'
+    })
+}
