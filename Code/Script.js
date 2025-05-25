@@ -1,4 +1,5 @@
 let StartButton=document.getElementById('Starter');
+let startimg=document.getElementById('startimg');
 let credits=document.getElementById('credits')
 let popki=document.getElementById('popki');
 let grass=document.getElementById('world');
@@ -9,19 +10,19 @@ let diamond_num=document.getElementById('diamond_num');
 let alerts=document.getElementById('alert');
 let yes=document.getElementById('yes');
 let no=document.getElementById('no');
-let taketree=document.getElementById('taketree')
-let iftaketreebutton=document.getElementById('iftaketreebutton')
-let taketree_second=document.getElementById('taketree_second')
-let iftaketreebutton_second=document.getElementById('iftaketreebutton_second')
-let taketree_in_1=document.getElementById('taketree_in_1')
-let taketree_in_2=document.getElementById('taketree_in_2')
-let taketree_in_3=document.getElementById('taketree_in_3')
-let taketree_in_4=document.getElementById('taketree_in_4')
-let taketree_in_5=document.getElementById('taketree_in_5')
-let taketree2_in_1=document.getElementById('taketree2_in_1')
-let taketree2_in_2=document.getElementById('taketree2_in_2')
-document.querySelectorAll('[id="span"]').forEach(el => {
-  el.style.display = 'none';
+let taketree=document.getElementById('taketree');
+let iftaketreebutton=document.getElementById('iftaketreebutton');
+let taketree_second=document.getElementById('taketree_second');
+let iftaketreebutton_second=document.getElementById('iftaketreebutton_second');
+let taketree_in_1=document.getElementById('taketree_in_1');
+let taketree_in_2=document.getElementById('taketree_in_2');
+let taketree_in_3=document.getElementById('taketree_in_3');
+let taketree_in_4=document.getElementById('taketree_in_4');
+let taketree_in_5=document.getElementById('taketree_in_5');
+let taketree2_in_1=document.getElementById('taketree2_in_1');
+let taketree2_in_2=document.getElementById('taketree2_in_2');
+document.querySelectorAll('[id="span"]').forEach(el=>{
+  el.style.display='none';
 });
 let gold=0;
 let tree=0;
@@ -62,6 +63,7 @@ let house={
     주택:false,
     국방부:false
 }
+let house_=['움집','초가집','성','주택','국방부']
 let yosae={
     토성:false,
     감시초소:false,
@@ -69,23 +71,27 @@ let yosae={
     전망대:false,
     스나이퍼타워:false
 }
+let yosea_=['토성','감시초소','탑','전망대','스나이퍼타워']
 let sangsan={
     공방:false,
     대장간:false,
     공장:false,
     ai공장:false
 }
+let sangsan_=['공방','대장간','공장','ai공장']
 let doback={
     주점:false,
     아지트:false,
     카지노:false
 }
+let doback_=['주점','아지트','카지노']
 let cheeryo={
     온천:false,
     의원:false,
     동네병원:false,
     대학병원:false
 }
+let cheeryo_=['온천','의원','동네병원','대학병원']
 let follow=[];
 let name=''
 popki.style.display='none';
@@ -107,6 +113,7 @@ taketree_in_4.style.display='none'
 taketree_in_5.style.display='none'
 taketree2_in_1.style.display='none'
 taketree2_in_2.style.display='none'
+startimg.style.display='block'
 music.volume=0.3
 credits_music.volume=0.3
 let need_money=null;
@@ -141,6 +148,7 @@ function update(){
     if (ifstart){
         StartButton.style.display="none";
         credits.style.display="none";
+        startimg.style.display='none'
         create(entity[4]);
         popki.style.display='block'
         golder.style.display='block'
@@ -157,6 +165,7 @@ function update(){
     }else if(ifcredits){
         StartButton.style.display="none";
         credits.style.display="none";
+        startimg.style.display='none'
         start_credits();
     }else{
         StartButton.style.display="block";
@@ -224,7 +233,7 @@ function create(wt){
     creater.className=wt;
     creater.type="button";
     creater.style.position="absolute";
-    creater.style.top=String(Math.floor(Math.random()*(window.innerHeight)))+'px';
+    creater.style.top=String(Math.floor(Math.random()*(window.innerHeight-51)))+'px';
     creater.style.left=String(Math.floor(Math.random()*(window.innerWidth-300)))+'px';
     document.body.appendChild(creater);
     all.push(creater);
@@ -237,7 +246,7 @@ function create(wt){
 }
 function create_gold(){
     if (golds.length<20){
-        let xrandom=Math.floor(Math.random()*(window.innerWidth));
+        let xrandom=Math.floor(Math.random()*(window.innerWidth-51));
         let yrandom=Math.floor(Math.random()*(window.innerHeight-300));
         xrandom=String(xrandom)+'px';
         yrandom=String(yrandom)+'px';
@@ -251,7 +260,7 @@ function create_gold(){
         golds.push(creategold);
         golds[golds.length-1].addEventListener('click',()=>{
             for (var i=0;i<all.length;i++){
-                if (math(all[i],creategold)<150){
+                if (math(all[i],creategold)<200){
                     goldsound.play();
                     creategold.remove();
                     golds.splice(0,1)
@@ -265,7 +274,7 @@ function create_gold(){
 }
 function create_tree(){
     if (trees.length<10){
-        let xrandom=Math.floor(Math.random()*(window.innerWidth));
+        let xrandom=Math.floor(Math.random()*(window.innerWidth-51));
         let yrandom=Math.floor(Math.random()*(window.innerHeight-300));
         xrandom=String(xrandom)+'px';
         yrandom=String(yrandom)+'px';
@@ -279,7 +288,7 @@ function create_tree(){
         trees.push(createtree);
         trees[trees.length-1].addEventListener('click',()=>{
             for (var i=0;i<all.length;i++){
-                if (math(all[i],createtree)<150){
+                if (math(all[i],createtree)<200){
                     treesound.play();
                     createtree.remove();
                     trees.splice(0,1)
@@ -294,7 +303,7 @@ function create_tree(){
 }
 function create_rock(){
     if (rocks.length<10){
-        let xrandom=Math.floor(Math.random()*(window.innerWidth));
+        let xrandom=Math.floor(Math.random()*(window.innerWidth-51));
         let yrandom=Math.floor(Math.random()*(window.innerHeight-300));
         xrandom=String(xrandom)+'px';
         yrandom=String(yrandom)+'px';
@@ -308,7 +317,7 @@ function create_rock(){
         rocks.push(createrock);
         rocks[rocks.length-1].addEventListener('click',()=>{
             for (var i=0;i<all.length;i++){
-                if (math(all[i],createrock)<150){
+                if (math(all[i],createrock)<200){
                     rocksound.play();
                     createrock.remove();
                     rocks.splice(0,1)
@@ -323,7 +332,7 @@ function create_rock(){
 }
 function create_diamond(){
     if (diamonds.length<1){
-        let xrandom=Math.floor(Math.random()*(window.innerWidth));
+        let xrandom=Math.floor(Math.random()*(window.innerWidth-51));
         let yrandom=Math.floor(Math.random()*(window.innerHeight-300));
         xrandom=String(xrandom)+'px';
         yrandom=String(yrandom)+'px';
@@ -337,7 +346,7 @@ function create_diamond(){
         diamonds.push(creatediamond);
         diamonds[diamonds.length-1].addEventListener('click',()=>{
             for (var i=0;i<all.length;i++){
-                if (math(all[i],creatediamond)<150){
+                if (math(all[i],creatediamond)<200){
                     diamondsound.play();
                     creatediamond.remove();
                     diamonds.splice(0,1)
@@ -503,9 +512,7 @@ function yee(){
         var t=parseInt(all[i].style.top.replace('px',''))+35;
         var xx=x-l
         var yy=y-t
-        var n=entity_all[all[i].id+"_all"]
-        n=n['speed'];
-        move(i,xx,yy,n);
+        move(i,xx,yy,1);
     }
     requestAnimationFrame(yee);
 }
