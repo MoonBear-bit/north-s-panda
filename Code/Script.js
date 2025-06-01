@@ -1,0 +1,708 @@
+let StartButton=document.getElementById('Starter');
+let startimg=document.getElementById('startimg');
+let credits=document.getElementById('credits')
+let popki=document.getElementById('popki');
+let grass=document.getElementById('world');
+let golder=document.getElementById('money');
+let tree_num=document.getElementById('tree_num');
+let rock_num=document.getElementById('rock_num');
+let diamond_num=document.getElementById('diamond_num');
+let alerts=document.getElementById('alert');
+let yes=document.getElementById('yes');
+let no=document.getElementById('no');
+let techtree=document.getElementById('techtree');
+let iftechtreebutton=document.getElementById('iftechtreebutton');
+let techtree_second=document.getElementById('techtree_second');
+let iftechtreebutton_second=document.getElementById('iftechtreebutton_second');
+let techtree_in_1=document.getElementById('techtree_in_1');
+let techtree_in_2=document.getElementById('techtree_in_2');
+let techtree_in_3=document.getElementById('techtree_in_3');
+let techtree_in_4=document.getElementById('techtree_in_4');
+let techtree_in_5=document.getElementById('techtree_in_5');
+let techtree2_in_1=document.getElementById('techtree2_in_1');
+let techtree2_in_2=document.getElementById('techtree2_in_2');
+let build=document.getElementById('build');
+let buildbutton=document.getElementById('buildbutton');
+let build_what=document.getElementById('build_what');
+document.querySelectorAll('[id="span"]').forEach(el=>{
+  el.style.display='none';
+});
+let gold=0;
+let tree=0;
+let rock=0;
+let diamond=0;
+let opening=new Audio("Sound/North's panda.mp3");
+let goldsound=new Audio('Sound/gold.mp3')
+let eggsound=new Audio('Sound/egg.mp3')
+let treesound=new Audio('Sound/tree.mp3')
+let rocksound=new Audio('Sound/rock.mp3')
+let diamondsound=new Audio('Sound/diamond.mp3')
+let start=new Audio('Sound/system start.mp3')
+let music=new Audio('Sound/dark.mp3')
+let credits_music=new Audio('Sound/main.mp3')
+let war_music=new Audio('Sound/war.mp3')
+let ifstart=false;
+let ifcredits=false;
+let money=0;
+let all=[];
+let golds=[];
+let trees=[];
+let rocks=[];
+let diamonds=[];
+let entity=['Northpolebear','Firebear','Whatgo','Fiveridecoo','Twistworm','Realdotdog','Blackpig','Silverlongfish'];
+let entity_all={
+    Northpolebear_all:{power:3,speed:1,get:1,create:1},
+    Firebear_all:{power:3,speed:1,get:1,create:1},
+    Whatgo_all:{power:1,speed:1,get:1,create:3},
+    Fiveridecoo_all:{power:1,speed:1,get:1,create:1},
+    Twistworm_all:{power:2,speed:1,get:2,create:2},
+    Realdotdog_all:{power:1,speed:1,get:3,create:1},
+    Blackpig_all:{power:1,speed:1,get:1,create:1},
+    Silverlongfish_all:{power:1,speed:1,get:1,create:3},
+}
+let house={
+    움집:false,
+    초가집:false,
+    성:false,
+    주택:false,
+    국방부:false
+}
+let house_=['움집','초가집','성','주택','국방부','end']
+let house_what=0
+let yosae={
+    토성:false,
+    감시초소:false,
+    탑:false,
+    전망대:false,
+    스나이퍼타워:false
+}
+let yosae_=['토성','감시초소','탑','전망대','스나이퍼타워','end']
+let yosae_what=0
+let sangsan={
+    공방:false,
+    대장간:false,
+    공장:false,
+    ai공장:false
+}
+let sangsan_=['공방','대장간','공장','ai공장','end']
+let sangsan_what=0
+let doback={
+    주점:false,
+    아지트:false,
+    카지노:false
+}
+let doback_=['주점','아지트','카지노','end']
+let doback_what=0
+let cheeryo={
+    온천:false,
+    의원:false,
+    동네병원:false,
+    대학병원:false
+}
+let cheeryo_=['온천','의원','동네병원','대학병원','end']
+let wheels=['움집','초가집','성','주택','국방부','토성','감시초소','탑','전망대','스나이퍼타워','공방','대장간',
+    '공장','ai공장','주점','아지트','카지노','온천','의원','동네병원','대학병원']
+let cheeryo_what=0
+let need_diamond=[1,1,1,1,1]
+let follow=[];
+let name=''
+let ifwar=false;
+let ifmouseinthebuildwhat=false
+let ifbuild=false
+popki.style.display='none';
+golder.style.display='none';
+tree_num.style.display='none';
+rock_num.style.display='none';
+diamond_num.style.display='none';
+alerts.style.display='none';
+yes.style.display='none';
+no.style.display='none';
+techtree.style.display='none';
+iftechtreebutton.style.display='none';
+techtree_second.style.display='none';
+iftechtreebutton_second.style.display='none';
+techtree_in_1.style.display='none'
+techtree_in_2.style.display='none'
+techtree_in_3.style.display='none'
+techtree_in_4.style.display='none'
+techtree_in_5.style.display='none'
+techtree2_in_1.style.display='none'
+techtree2_in_2.style.display='none'
+build.style.display='none';
+buildbutton.style.display='none';
+build_what.style.display='none'
+startimg.style.display='block'
+music.volume=0.8
+credits_music.volume=0.3
+let need_money=null;
+function starttutorial(){
+    alert('There is an earthworm in front of you.')
+    alert('Click on the worm. and click again to move it to the location you want it to be moved to.')
+    alert('Click on the worm again to stop it moving.')
+    alert('You can enhance your tech tree with diamonds to increase your construction and production capabilities.')
+    alert('Use the mouse wheel to select what you want to build, then click on the location where you want to build to build it.')
+    alert('Move your allies to get resources close by.')
+    alert('And, collect money and click on the egg. You will get an ally.')
+    alert('As time goes by, your enemies will strangle you. Fight them and survive.')
+    alert('Kill the salmon.')
+    alert('Are you ready?')
+    alert('Go.')
+}
+yes.addEventListener('click', (()=>{
+    starttutorial();
+    alerts.style.display='none';
+    yes.style.display='none';
+    no.style.display='none';
+}));
+no.addEventListener('click', ()=>{
+    alerts.style.display='none';
+    yes.style.display='none';
+    no.style.display='none';
+});
+function what_(name){
+    alerts.style.display='block';
+    yes.style.display='block';
+    no.style.display='block';
+    if (name=='튜토리얼'){
+        alerts.textContent='Tutorial?'; 
+    }
+}
+function update(){
+    if (ifstart){
+        StartButton.style.display="none";
+        credits.style.display="none";
+        startimg.style.display='none'
+        create(entity[4]);
+        popki.style.display='block'
+        golder.style.display='block'
+        tree_num.style.display='block'
+        rock_num.style.display='block'
+        diamond_num.style.display='block'
+        iftechtreebutton.style.display='block';
+        iftechtreebutton_second.style.display='block';
+        buildbutton.style.display='block';
+        //techtree.style.display='block';
+        gold_make();
+        tree_make();
+        rock_make();
+        diamond_make();
+    }else if(ifcredits){
+        StartButton.style.display="none";
+        credits.style.display="none";
+        startimg.style.display='none'
+        start_credits();
+    }else{
+        StartButton.style.display="block";
+        credits.style.display="block";
+    }
+}
+update();
+iftechtreebutton.addEventListener('click',()=>{
+    if (techtree.style.display=='block'){
+        techtree.style.display='none'
+    }else{
+        techtree.style.display='block'
+    }
+});
+iftechtreebutton_second.addEventListener('click',()=>{
+    if (techtree_second.style.display=='block'){
+        techtree_second.style.display='none'
+    }else{
+        techtree_second.style.display='block'
+    }
+});
+buildbutton.addEventListener('click',()=>{
+    if (build.style.display=='block'){
+        build.style.display='none'
+    }else{
+        build.style.display='block'
+    }
+});
+StartButton.addEventListener('click',()=>{
+    let name='튜토리얼'
+    what_(name);
+    ifstart=true;
+    music.play();
+    update();
+});
+credits.addEventListener('click',()=>{
+    ifcredits=true;
+    update();
+})
+music.addEventListener('ended',()=>{
+    if (!ifwar){
+        music.play();
+    }
+})
+function __random__(){
+    let random=Math.random();
+    console.log(random);
+    let num=1/8;
+    let reterner=null;
+    if (random<num && random>0){
+        reterner=0;
+    }else if (random<num*2 && random>num){
+        reterner=1;
+    }else if (random<num*3 && random>num*2){
+        reterner=2;
+    }else if (random<num*4 && random>num*3){
+        reterner=3;
+    }else if (random<num*5 && random>num*4){
+        reterner=4;
+    }else if (random<num*6 && random>num*5){
+        reterner=5;
+    }else if (random<num*7 && random>num*6){
+        reterner=6;
+    }else if (random<num*8 && random>num*7){
+        reterner=7;
+    }else{
+        reterner='Nothing';
+    }
+    return reterner;
+}   
+function create(wt){
+    const creater=document.createElement("button");
+    creater.id=wt;
+    creater.className=wt;
+    creater.type="button";
+    creater.style.position="absolute";
+    creater.style.left=String(Math.floor(Math.random()*(window.innerWidth-151)))+'px';
+    creater.style.top=String(Math.floor(100+Math.random()*(window.innerHeight-300)))+'px';
+    document.body.appendChild(creater);
+    all.push(creater);
+    follow=[]
+    for (var i=0; i<all.length; i++){
+        follow.push(false);
+    }
+    follow.push(false);
+    forfor();
+}
+function create_gold(){
+    if (golds.length<20){
+        let xrandom=Math.floor(Math.random()*(window.innerWidth-151));
+        let yrandom=Math.floor(100+Math.random()*(window.innerHeight-300));
+        xrandom=String(xrandom)+'px';
+        yrandom=String(yrandom)+'px';
+        let creategold=document.createElement('button');
+        creategold.className='gold';
+        creategold.type='button';
+        creategold.style.left=xrandom;
+        creategold.style.top=yrandom;
+        creategold.style.display='block';
+        document.body.appendChild(creategold);
+        golds.push(creategold);
+        golds[golds.length-1].addEventListener('click',()=>{
+            for (var i=0;i<all.length;i++){
+                if (math(all[i],creategold)<200){
+                    goldsound.play();
+                    creategold.remove();
+                    golds.splice(0,1)
+                    gold+=1;
+                    return
+                }
+            }
+        });
+    }
+    
+}
+function create_tree(){
+    if (trees.length<10){
+        let xrandom=Math.floor(Math.random()*(window.innerWidth-151));
+        let yrandom=Math.floor(100+Math.random()*(window.innerHeight-300));
+        xrandom=String(xrandom)+'px';
+        yrandom=String(yrandom)+'px';
+        let createtree=document.createElement('button');
+        createtree.className='tree';
+        createtree.type='button';
+        createtree.style.left=xrandom;
+        createtree.style.top=yrandom;
+        createtree.style.display='block';
+        document.body.appendChild(createtree);
+        trees.push(createtree);
+        trees[trees.length-1].addEventListener('click',()=>{
+            for (var i=0;i<all.length;i++){
+                if (math(all[i],createtree)<200){
+                    treesound.play();
+                    createtree.remove();
+                    trees.splice(0,1)
+                    tree+=1;
+                    return
+                }
+            }
+            
+        });
+    }
+    
+}
+function create_rock(){
+    if (rocks.length<10){
+        let xrandom=Math.floor(Math.random()*(window.innerWidth-151));
+        let yrandom=Math.floor(100+Math.random()*(window.innerHeight-300));
+        xrandom=String(xrandom)+'px';
+        yrandom=String(yrandom)+'px';
+        let createrock=document.createElement('button');
+        createrock.className='rock';
+        createrock.type='button';
+        createrock.style.left=xrandom;
+        createrock.style.top=yrandom;
+        createrock.style.display='block';
+        document.body.appendChild(createrock);
+        rocks.push(createrock);
+        rocks[rocks.length-1].addEventListener('click',()=>{
+            for (var i=0;i<all.length;i++){
+                if (math(all[i],createrock)<200){
+                    rocksound.play();
+                    createrock.remove();
+                    rocks.splice(0,1)
+                    rock+=1;
+                    return
+                }
+            }
+            
+        });  
+    }
+    
+}
+function create_diamond(){
+    if (diamonds.length<1){
+        let xrandom=Math.floor(Math.random()*(window.innerWidth-151));
+        let yrandom=Math.floor(100+Math.random()*(window.innerHeight-300));
+        xrandom=String(xrandom)+'px';
+        yrandom=String(yrandom)+'px';
+        let creatediamond=document.createElement('button');
+        creatediamond.className='diamond';
+        creatediamond.type='button';
+        creatediamond.style.left=xrandom;
+        creatediamond.style.top=yrandom;
+        creatediamond.style.display='block';
+        document.body.appendChild(creatediamond);
+        diamonds.push(creatediamond);
+        diamonds[diamonds.length-1].addEventListener('click',()=>{
+            for (var i=0;i<all.length;i++){
+                if (math(all[i],creatediamond)<200){
+                    diamondsound.play();
+                    creatediamond.remove();
+                    diamonds.splice(0,1)
+                    diamond+=1;
+                    return
+                }
+            }
+        });
+    }
+    
+}
+function math(elem1,elem2){
+    let x1=elem1.offsetLeft;
+    let y1=elem1.offsetTop;
+    let x2=elem2.offsetLeft;
+    let y2=elem2.offsetTop;
+    let dx=x1-x2;
+    let dy=y1-y2;
+    return Math.sqrt(dx*dx+dy*dy);
+}
+function what(){
+    random_what=__random__();
+    if (random_what=='Nothing'){
+    }else{
+        create(entity[random_what]);
+    }
+}
+function add_2(i){
+    if (follow[i]===true){
+        follow[i]=false
+    }else{
+        if (!follow[i]){
+                follow[i]=true;
+                console.log(i)
+        }
+    } 
+}
+function add(i){
+    all[i].addEventListener("click",()=>{
+        console.log(follow[i])
+        add_2(i);  
+    });
+}
+function forfor(){
+    add(all.length-1)
+}
+popki.addEventListener('mouseenter',()=>{
+    popki.style.opacity=0.5;
+});
+popki.addEventListener('mouseleave',()=>{
+    popki.style.opacity=1;
+});
+golder.addEventListener('mouseenter',()=>{
+    golder.style.opacity=0.5;
+});
+golder.addEventListener('mouseleave',()=>{
+    golder.style.opacity=1;
+});
+tree_num.addEventListener('mouseenter',()=>{
+    tree_num.style.opacity=0.5;
+});
+tree_num.addEventListener('mouseleave',()=>{
+    tree_num.style.opacity=1;
+});
+rock_num.addEventListener('mouseenter',()=>{
+    rock_num.style.opacity=0.5;
+});
+rock_num.addEventListener('mouseleave',()=>{
+    rock_num.style.opacity=1;
+});
+diamond_num.addEventListener('mouseenter',()=>{
+    diamond_num.style.opacity=0.5;
+});
+diamond_num.addEventListener('mouseleave',()=>{
+    diamond_num.style.opacity=1;
+});
+document.addEventListener("mousemove",(event)=>{
+    x=event.clientX;
+    y=event.clientY;
+});
+function gold_make(){
+    setTimeout(()=>{
+        create_gold();
+        gold_make();
+    },Math.floor(5000+(Math.random()*(15000-5000))))
+}
+function tree_make(){
+    setTimeout(()=>{
+        create_tree();
+        tree_make();
+    },Math.floor(5000+(Math.random()*(15000-5000))))
+}
+function rock_make(){
+    setTimeout(()=>{
+        create_rock();
+        rock_make();
+    },Math.floor(5000+(Math.random()*(15000-5000))))
+}
+function diamond_make(){
+    setTimeout(()=>{
+        create_diamond();
+        diamond_make();
+    },Math.floor(50000+(Math.random()*(150000-50000))))
+}
+popki.addEventListener('click',()=>{
+    if (gold>=need_money){
+        gold-=need_money;
+        create(entity[__random__()]);
+    }
+});
+function move(i__,xxy,yyx,n_){
+    if (follow[i__]){
+        if (xxy>0){
+            all[i__].style.left=String(parseInt(all[i__].style.left.replace('px',''))+n_)+"px";
+        }else if (xxy<0){
+            all[i__].style.left=String(parseInt(all[i__].style.left.replace('px',''))-n_)+"px";
+        }
+        if (yyx>0){
+            all[i__].style.top=String(parseInt(all[i__].style.top.replace('px',''))+n_)+"px";
+        }else if (yyx<0){
+            all[i__].style.top=String(parseInt(all[i__].style.top.replace('px',''))-n_)+"px";
+        }
+    }
+}
+function yee(){
+    techtree_in_1.textContent=house_[house_what]+' '+need_diamond[0]
+    techtree_in_2.textContent=yosae_[yosae_what]+' '+need_diamond[1]
+    techtree_in_3.textContent=sangsan_[sangsan_what]+' '+need_diamond[2]
+    techtree_in_4.textContent=doback_[doback_what]+' '+need_diamond[3]
+    techtree_in_5.textContent=cheeryo_[cheeryo_what]+' '+need_diamond[4]
+    if (techtree.style.display=='block'){
+        iftechtreebutton.style.left='50vw'
+        techtree_in_1.style.display='block'
+        techtree_in_2.style.display='block'
+        techtree_in_3.style.display='block'
+        techtree_in_4.style.display='block'
+        techtree_in_5.style.display='block'
+    }else{
+        iftechtreebutton.style.left='0vw'
+        techtree_in_1.style.display='none'
+        techtree_in_2.style.display='none'
+        techtree_in_3.style.display='none'
+        techtree_in_4.style.display='none'
+        techtree_in_5.style.display='none'
+    }
+    if (techtree_second.style.display=='block'){
+        iftechtreebutton_second.style.left='50vw'
+        techtree2_in_1.style.display='block'
+        techtree2_in_2.style.display='block'
+    }else{
+        iftechtreebutton_second.style.left='0vw'
+        techtree2_in_1.style.display='none'
+        techtree2_in_2.style.display='none'
+    }
+    if (build.style.display=='block'){
+        buildbutton.style.left='50vw'
+        build_what.style.display='block'
+    }else{
+        buildbutton.style.left='0vw'
+        build_what.style.display='none'
+    }
+    if (follow.includes(true)){
+        grass.style.cursor='crosshair';
+    }else{
+        grass.style.cursor='default';
+    }
+    need_money=all.length*10;
+    popki.textContent=String(need_money);
+    golder.textContent=String(gold);
+    tree_num.textContent=String(tree);
+    rock_num.textContent=String(rock);
+    diamond_num.textContent=String(diamond);
+    for (var i=0; i<all.length; i++){
+        var l=parseInt(all[i].style.left.replace('px',''))+35;
+        var t=parseInt(all[i].style.top.replace('px',''))+35;
+        var xx=x-l
+        var yy=y-t
+        move(i,xx,yy,1);
+    }
+    requestAnimationFrame(yee);
+}
+yee();
+function start_credits(){
+    credits_music.play();
+    grass.style.display='none'
+    document.querySelectorAll('[id="span"]').forEach(el => {
+        el.style.display = 'block';
+    });
+    credits_music.addEventListener('ended',()=>{
+        credits_music.play()
+    })
+}
+function build_what_move(){
+    if (build_what.textContent=='null'){
+        build_what.textContent=wheels[0]
+    }else{
+        var what_the_textContent_in_build_what=null
+        what_the_textContent_in_build_what=wheels[wheels.indexOf(build_what.textContent)]
+        if (house_.includes(what_the_textContent_in_build_what)){
+            if (what_the_textContent_in_build_what==house_[house_.length-2]){
+                build_what.textContent=yosae_[0]
+            }else{
+                if (what_the_textContent_in_build_what==null){
+                    build_what.textContent=house_[1]
+                }
+                else{
+                    build_what.textContent=house_[house_.indexOf(what_the_textContent_in_build_what)+1]
+                }
+            }
+        }
+        if (yosae_.includes(what_the_textContent_in_build_what)){
+            if (what_the_textContent_in_build_what==yosae_[yosae_.length-2]){
+                build_what.textContent=sangsan_[0]
+            }else{
+                if (what_the_textContent_in_build_what==null){
+                    build_what.textContent=yosae_[1]
+                }
+                else{
+                    build_what.textContent=yosae_[yosae_.indexOf(what_the_textContent_in_build_what)+1]
+                }
+            }
+        }
+        if (sangsan_.includes(what_the_textContent_in_build_what)){
+            if (what_the_textContent_in_build_what==sangsan_[sangsan_.length-2]){
+                build_what.textContent=doback_[0]
+            }else{
+                if (what_the_textContent_in_build_what==null){
+                    build_what.textContent=sangsan_[1]
+                }
+                else{
+                    build_what.textContent=sangsan_[sangsan_.indexOf(what_the_textContent_in_build_what)+1]
+                }
+            }
+        }
+        if (doback_.includes(what_the_textContent_in_build_what)){
+            if (what_the_textContent_in_build_what==doback_[doback_.length-2]){
+                build_what.textContent=cheeryo_[0]
+            }else{
+                if (what_the_textContent_in_build_what==null){
+                    build_what.textContent=doback_[1]
+                }
+                else{
+                    build_what.textContent=doback_[doback_.indexOf(what_the_textContent_in_build_what)+1]
+                }
+            }
+        }
+        if (cheeryo_.includes(what_the_textContent_in_build_what)){
+            if (what_the_textContent_in_build_what==cheeryo_[cheeryo_.length-2]){
+                build_what.textContent=house_[0]
+            }else{
+                if (what_the_textContent_in_build_what==null){
+                    build_what.textContent=cheeryo_[1]
+                }
+                else{
+                    build_what.textContent=cheeryo_[cheeryo_.indexOf(what_the_textContent_in_build_what)+1]
+                }
+            }
+        }
+    }
+}
+techtree_in_1.addEventListener('click',()=>{
+    if (diamond>need_diamond[0]-1 && house_what<5){
+        house_what+=1
+        diamond-=need_diamond[0]
+        need_diamond[0]=need_diamond[0]*3
+        house[house_[house_what-1]]=true
+    }
+});
+techtree_in_2.addEventListener('click',()=>{
+    if (diamond>need_diamond[1]-1 && yosae_what<5){
+        yosae_what+=1
+        diamond-=need_diamond[1]
+        need_diamond[1]=need_diamond[1]*3
+        yosae[yosae_[yosae_what-1]]=true
+    }
+});
+techtree_in_3.addEventListener('click',()=>{
+    if (diamond>need_diamond[2]-1 && sangsan_what<4){
+        sangsan_what+=1
+        diamond-=need_diamond[2]
+        need_diamond[2]=need_diamond[2]*3
+        sangsan[sangsan_[sangsan_what-1]]=true
+    }
+});
+techtree_in_4.addEventListener('click',()=>{
+    if (diamond>need_diamond[3]-1 && doback_what<3){
+        doback_what+=1
+        diamond-=need_diamond[3]
+        need_diamond[3]=need_diamond[3]*3
+        doback[doback_[doback_what-1]]=true
+    }
+});
+techtree_in_5.addEventListener('click',()=>{
+    if (diamond>need_diamond[4]-1 && cheeryo_what<4){
+        cheeryo_what+=1
+        diamond-=need_diamond[4]
+        need_diamond[4]=need_diamond[4]*3
+        cheeryo[cheeryo_[cheeryo_what-1]]=true
+    }
+});
+build_what.addEventListener('mouseenter',()=>{
+    ifmouseinthebuildwhat=true
+});
+build_what.addEventListener('mouseleave',()=>{
+    ifmouseinthebuildwhat=false
+});
+build_what.addEventListener('wheel',()=>{
+    if (ifmouseinthebuildwhat){
+        build_what_move()
+    }
+});
+build_what.addEventListener('click',()=>{
+    build.style.display='none'
+    buildbutton.style.left='0vw'
+    alert('Click to build. Right click to cancel.')
+    ifbuild=true
+});
+grass.addEventListener('mousedown',(event)=>{
+    if (ifbuild){
+        if (event.button===0){
+            //
+        }else if(event.button===2){
+            ifbuild=false;
+        }
+    }
+});

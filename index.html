@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>북쪽의 푸바오</title>
+    <link rel="stylesheet" href="Code/Style.css">
+</head>
+<body>
+    <div id="world" class="world"></div>
+    <div class="techtree" id="techtree"></div>
+    <button class="iftechtreebutton" id="iftechtreebutton" type="button">techtree1</button>
+    <div class="techtree_second" id="techtree_second"></div>
+    <button class="iftechtreebutton_second" id="iftechtreebutton_second" type="button">techtree2</button>
+    <div class="build" id="build"></div>
+    <button class="buildbutton" id="buildbutton" type="button">build</button>
+    <button class="build_what" id="build_what" type="button">null</button>
+    <button class="StartButton" id="Starter" type="button">start</button>
+    <button class="credits" id="credits" type="button">credits</button>
+    <button class="popki" id="popki" type="button"></button>
+    <button class="money" id="money"></button>
+    <button class="tree_num" id="tree_num"></button>
+    <button class="rock_num" id="rock_num"></button>
+    <button class="diamond_num" id="diamond_num"></button>
+    <div class="alert" id="alert">Tutorial?</div>
+    <button class="yes" id="yes" type="button">yes</button>
+    <button class="no" id="no" type="button">no</button>
+    <div class="start" id="startimg"></div>
+    <span id="span" style="position: absolute; top: 0vh; left: 0vw; color: white; font-size: 2vh;">게임에 참여하신 것을 환영합니다.</span>
+    <span id="span" style="position: absolute; top: 2vh; left: 0vw; color: white; font-size: 2vh;">언제나 여러분을 기다리고 있었습니다.</span>
+    <span id="span" style="position: absolute; top: 4vh; left: 0vw; color: white; font-size: 2vh;">내 절친 Twistworm. 그리고 Silverlongfish, Blackpig에게 감사를 전합니다.</span>
+    <span id="span" style="position: absolute; top: 6vh; left: 0vw; color: white; font-size: 2vh;">오디오는 pixabay에서 가져왔습니다. 감사드립니다.</span>
+    <span id="span" style="position: absolute; top: 8vh; left: 0vw; color: white; font-size: 2vh;">이 게임의 이름 제작에 도움을 받은 '북쪽의 푸바오'의 수하들에게 감사를 전합니다.</span>
+    <span id="span" style="position: absolute; top: 10vh; left: 0vw; color: white; font-size: 2vh;">이 게임을 만들다니 꿈만 같습니다.</span>
+    <span id="span" style="position: absolute; top: 14vh; left: 0vw; color: white; font-size: 2vh;">그리고</span>
+    <span id="span" style="position: absolute; top: 16vh; left: 0vw; color: white; font-size: 2vh;">이 게임의 주요 인물들 구성에 자신의 이름을 기꺼이 내주신</span>
+    <span id="span" style="position: absolute; top: 18vh; left: 0vw; color: white; font-size: 2vh;">Mr.Northpolebear-북극곰</span>
+    <span id="span" style="position: absolute; top: 20vh; left: 0vw; color: white; font-size: 2vh;">Mr.Twistworm-지렁이</span>
+    <span id="span" style="position: absolute; top: 22vh; left: 0vw; color: white; font-size: 2vh;">Mr.Silverlongfish-은갈치</span>
+    <span id="span" style="position: absolute; top: 24vh; left: 0vw; color: white; font-size: 2vh;">Mr.Whatgo-고라니</span>
+    <span id="span" style="position: absolute; top: 26vh; left: 0vw; color: white; font-size: 2vh;">Mr.Realdotdog-진돗개</span>
+    <span id="span" style="position: absolute; top: 28vh; left: 0vw; color: white; font-size: 2vh;">Mr.Blackpig-흑돼지</span>
+    <span id="span" style="position: absolute; top: 30vh; left: 0vw; color: white; font-size: 2vh;">Mr.Fiveridecoo-오토바이</span>
+    <span id="span" style="position: absolute; top: 32vh; left: 0vw; color: white; font-size: 2vh;">Mr.Softfish-연어</span>
+    <span id="span" style="position: absolute; top: 34vh; left: 0vw; color: white; font-size: 2vh;">그리고 저.</span>
+    <span id="span" style="position: absolute; top: 36vh; left: 0vw; color: white; font-size: 2vh;">Mr.FireBear-불곰</span>
+    <span id="span" style="position: absolute; top: 38vh; left: 0vw; color: white; font-size: 2vh;">시간이 지난 후 다시 만날 수 있다면 좋겠군요.</span>
+    <span id="span" style="position: absolute; top: 54vh; left: 0vw; color: white; font-size: 2vh;">-아이디어 제공</span>
+    <span id="span" style="position: absolute; top: 56vh; left: 0vw; color: white; font-size: 2vh;">...Twistworm</span>
+    <span id="span" style="position: absolute; top: 58vh; left: 0vw; color: white; font-size: 2vh;">...Silverlongfish</span>
+    <span id="span" style="position: absolute; top: 60vh; left: 0vw; color: white; font-size: 2vh;">...Blackpig</span>
+    <span id="span" style="position: absolute; top: 62vh; left: 0vw; color: white; font-size: 2vh;">...Firebear</span>
+    <span id="span" style="position: absolute; top: 66vh; left: 0vw; color: white; font-size: 2vh;">-오디오 제공</span>
+    <span id="span" style="position: absolute; top: 68vh; left: 0vw; color: white; font-size: 2vh;">...pixabay</span>
+    <span id="span" style="position: absolute; top: 70vh; left: 0vw; color: white; font-size: 2vh;">-이름 제공</span>
+    <span id="span" style="position: absolute; top: 72vh; left: 0vw; color: white; font-size: 2vh;">...북극곰</span>
+    <span id="span" style="position: absolute; top: 74vh; left: 0vw; color: white; font-size: 2vh;">...지렁이</span>
+    <span id="span" style="position: absolute; top: 76vh; left: 0vw; color: white; font-size: 2vh;">...은갈치</span>
+    <span id="span" style="position: absolute; top: 78vh; left: 0vw; color: white; font-size: 2vh;">...고라니</span>
+    <span id="span" style="position: absolute; top: 80vh; left: 0vw; color: white; font-size: 2vh;">...진돗개</span>
+    <span id="span" style="position: absolute; top: 82vh; left: 0vw; color: white; font-size: 2vh;">...흑돼지</span>
+    <span id="span" style="position: absolute; top: 84vh; left: 0vw; color: white; font-size: 2vh;">...오토바이</span>
+    <span id="span" style="position: absolute; top: 86vh; left: 0vw; color: white; font-size: 2vh;">...연어</span>
+    <span id="span" style="position: absolute; top: 88vh; left: 0vw; color: white; font-size: 2vh;">...불곰</span>
+    <span id="span" style="position: absolute; top: 92vh; left: 0vw; color: white; font-size: 2vh;">-제작</span>
+    <span id="span" style="position: absolute; top: 94vh; left: 0vw; color: white; font-size: 2vh;">...Firebear</span>
+    <span id="span" style="position: absolute; top: 98vh; left: 0vw; color: white; font-size: 2vh;">-스토리</span>
+    <span id="span" style="position: absolute; top: 100vh; left: 0vw; color: white; font-size: 2vh;">... 평범한 가을 가운데, 재앙이 닥쳤다.</span>
+    <span id="span" style="position: absolute; top: 102vh; left: 0vw; color: white; font-size: 2vh;">...연어 물가가 급등한 것. 그것이었다. 그로 인해 연어의 습격이 예상되었고,</span>
+    <span id="span" style="position: absolute; top: 104vh; left: 0vw; color: white; font-size: 2vh;">...연어를 구워서 '츄릅' 하려던 지렁이 일행은 연어 물가에서 살아남기로 했다.</span>
+    <span id="span" style="position: absolute; top: 106vh; left: 0vw; color: white; font-size: 2vh;">...시간이 지날 수록 연어 물가는 점점 올라가고, 더욱 생존에 위협이 된다.</span>
+    <span id="span" style="position: absolute; top: 108vh; left: 0vw; color: white; font-size: 2vh;">...모두는 고유 유물을 얻게 된다. 연어를 막기 위해 동물들을 불러오고,</span>
+    <span id="span" style="position: absolute; top: 110vh; left: 0vw; color: white; font-size: 2vh;">...건물을 건설한다. 그리고, 만든다.</span>
+    <span id="span" style="position: absolute; top: 112vh; left: 0vw; color: white; font-size: 2vh;">...살아남아야 한다.</span>
+
+    <button class="techtree_in_1" id="techtree_in_1" type="button"></button>
+    <button class="techtree_in_2" id="techtree_in_2" type="button"></button>
+    <button class="techtree_in_3" id="techtree_in_3" type="button"></button>
+    <button class="techtree_in_4" id="techtree_in_4" type="button"></button>
+    <button class="techtree_in_5" id="techtree_in_5" type="button"></button>
+    <button class="techtree2_in_1" id="techtree2_in_1" type="button"></button>
+    <button class="techtree2_in_2" id="techtree2_in_2" type="button"></button>
+    <script src="Code/Script.js" id="script"></script>
+</body>
+</html>
