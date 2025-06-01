@@ -488,3 +488,14 @@ body{
     z-index: 27;
     cursor: pointer;
 }
+.enemy{
+    position: absolute;    
+    height: 75px;
+    width: 75px;
+    background-color: black;
+    background-image: url("../Image/Hunter.png");
+    background-size: 75px 75px;
+    color: white;
+    cursor: pointer;
+    z-index: 5;
+}

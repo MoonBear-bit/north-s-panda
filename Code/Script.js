@@ -41,6 +41,8 @@ let start=new Audio('Sound/system start.mp3')
 let music=new Audio('Sound/dark.mp3')
 let credits_music=new Audio('Sound/main.mp3')
 let war_music=new Audio('Sound/war.mp3')
+let scream=new Audio('Sound/scream.mp3')
+let damage=new Audio('Sound/damage.mp3')
 let ifstart=false;
 let ifcredits=false;
 let money=0;
@@ -109,6 +111,7 @@ let name=''
 let ifwar=false;
 let ifmouseinthebuildwhat=false
 let ifbuild=false
+let enemy=[]
 popki.style.display='none';
 golder.style.display='none';
 tree_num.style.display='none';
@@ -218,21 +221,66 @@ buildbutton.addEventListener('click',()=>{
         build.style.display='block'
     }
 });
+function create_enemy(n,nhp,npower,nspeed){
+    const creater=document.createElement("button");
+    creater.id=n;
+    creater.hp=nhp
+    creater.power=npower
+    creater.speed=nspeed
+    creater.className='enemy';
+    creater.type="button";
+    creater.style.position="absolute";
+    creater.style.left=String(Math.floor(Math.random()*(window.innerWidth-151)))+'px';
+    creater.style.top=String(Math.floor(100+Math.random()*(window.innerHeight-300)))+'px';
+    document.body.appendChild(creater);
+    enemy.push(creater);
+    creater.addEventListener('click',()=>{
+        for(var i=0;i<all.length;i++){
+            if (math(creater,all[i])<200){
+                creater.hp-=entity_all[all[i].id+'_all']['power']
+                scream.play()
+                if (creater.hp<0){
+                    creater.remove()
+                    enemy.splice(indexOf(creater),1)
+                }
+            }
+        }
+    });
+    
+}
+function the_first_war(){
+    let warman_num=0
+    for(var i=0;i<3;i++){
+        create_enemy(warman_num,3,1,1)
+        warman_num+=1
+    }
+    ifwar=true
+    music.pause()
+    music.currentTime=0
+    war_music.play()
+    war_music.addEventListener('ended',()=>{
+        war_music.play()
+    })
+}
+function startwar(){
+    setTimeout(()=>{
+        the_first_war()
+    },100000);
+}
 StartButton.addEventListener('click',()=>{
     let name='튜토리얼'
     what_(name);
     ifstart=true;
     music.play();
     update();
+    startwar()
 });
 credits.addEventListener('click',()=>{
     ifcredits=true;
     update();
 })
 music.addEventListener('ended',()=>{
-    if (!ifwar){
-        music.play();
-    }
+    music.play();
 })
 function __random__(){
     let random=Math.random();
@@ -266,6 +314,8 @@ function create(wt){
     creater.className=wt;
     creater.type="button";
     creater.style.position="absolute";
+    creater.hp=10
+    creater.power=0
     creater.style.left=String(Math.floor(Math.random()*(window.innerWidth-151)))+'px';
     creater.style.top=String(Math.floor(100+Math.random()*(window.innerHeight-300)))+'px';
     document.body.appendChild(creater);
@@ -275,7 +325,16 @@ function create(wt){
         follow.push(false);
     }
     follow.push(false);
-    forfor();
+    const i_=all.length-1
+    creater.addEventListener('click',()=>{
+        if (follow[i_]===true){
+            follow[i_]=false
+        }else{
+            if (!follow[i_]){
+                follow[i_]=true;
+            }
+        } 
+    });
 }
 function create_gold(){
     if (golds.length<20){
@@ -392,10 +451,10 @@ function create_diamond(){
     
 }
 function math(elem1,elem2){
-    let x1=elem1.offsetLeft;
-    let y1=elem1.offsetTop;
-    let x2=elem2.offsetLeft;
-    let y2=elem2.offsetTop;
+    let x1=parseInt(elem1.style.left)+35;
+    let y1=parseInt(elem1.style.top)+35;
+    let x2=parseInt(elem2.style.left)+35;
+    let y2=parseInt(elem2.style.top)+35
     let dx=x1-x2;
     let dy=y1-y2;
     return Math.sqrt(dx*dx+dy*dy);
@@ -406,25 +465,6 @@ function what(){
     }else{
         create(entity[random_what]);
     }
-}
-function add_2(i){
-    if (follow[i]===true){
-        follow[i]=false
-    }else{
-        if (!follow[i]){
-                follow[i]=true;
-                console.log(i)
-        }
-    } 
-}
-function add(i){
-    all[i].addEventListener("click",()=>{
-        console.log(follow[i])
-        add_2(i);  
-    });
-}
-function forfor(){
-    add(all.length-1)
 }
 popki.addEventListener('mouseenter',()=>{
     popki.style.opacity=0.5;
@@ -504,7 +544,42 @@ function move(i__,xxy,yyx,n_){
         }
     }
 }
+let ifhit=true
+damage.addEventListener('ended',()=>{
+    ifhit=true;
+});
 function yee(){
+    for (var i=0;i<enemy.length;i++){
+        let what_the_small=0
+        for (var ii=0;ii<all.length;ii++){
+            if (math(enemy[i],all[ii])<math(enemy[i],all[what_the_small])){
+                what_the_small=ii
+            }
+        }
+        if (all[what_the_small].style.left<enemy[i].style.left){
+            enemy[i].style.left-=enemy[i].speed
+        }else{
+            enemy[i].style.left+=enemy[i].speed
+        }
+        if (all[what_the_small].style.top<enemy[i].style.top){
+            enemy[i].style.top-=enemy[i].speed
+        }else{
+            enemy[i].style.top+=enemy[i].speed
+        }
+    }
+    for (var i=0;i<all.length;i++){
+        for (var ii=0;ii<enemy.length;ii++){
+            if (math(all[i],enemy[ii])<70 && ifhit){
+                all[i].hp-=enemy[ii].power
+                damage.play()
+                ifhit=false
+                if(all[i].hp<0){
+                    all[i].remove()
+                    all.splice(i,1)
+                }
+            }
+        }
+    }
     techtree_in_1.textContent=house_[house_what]+' '+need_diamond[0]
     techtree_in_2.textContent=yosae_[yosae_what]+' '+need_diamond[1]
     techtree_in_3.textContent=sangsan_[sangsan_what]+' '+need_diamond[2]
