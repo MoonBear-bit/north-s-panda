@@ -499,3 +499,17 @@ body{
     cursor: pointer;
     z-index: 5;
 }
+.nobuild{
+    position: absolute; 
+    opacity: 1;
+    height: 100px;
+    width: 100px;
+    left: 0px;
+    top: 0px;
+    background-color: black;
+    border: 5px solid red;
+    color: red;
+    font-size: 25px;
+    z-index: 100;
+    cursor: pointer;
+}

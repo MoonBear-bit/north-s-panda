@@ -24,6 +24,7 @@ let techtree2_in_2=document.getElementById('techtree2_in_2');
 let build=document.getElementById('build');
 let buildbutton=document.getElementById('buildbutton');
 let build_what=document.getElementById('build_what');
+let nobuild=document.getElementById('nobuild')
 document.querySelectorAll('[id="span"]').forEach(el=>{
   el.style.display='none';
 });
@@ -136,6 +137,7 @@ build.style.display='none';
 buildbutton.style.display='none';
 build_what.style.display='none'
 startimg.style.display='block'
+nobuild.style.display='none'
 music.volume=0.8
 credits_music.volume=0.3
 let need_money=null;
@@ -776,18 +778,34 @@ build_what.addEventListener('wheel',()=>{
         build_what_move()
     }
 });
+let kidaleem=true
+build_what.addEventListener('mousemove',()=>{
+    if (kidaleem){
+        build_what_move()
+        kidaleem=false
+        setTimeout(()=>{
+            kidaleem=true
+        },100)
+    }
+})
+let iffirstbuild=true
 build_what.addEventListener('click',()=>{
     build.style.display='none'
     buildbutton.style.left='0vw'
-    alert('Click to build. Right click to cancel.')
+    if (iffirstbuild){
+        alert('Click to build. Right click to cancel.')
+        iffirstbuild=false
+    }
+    nobuild.style.display='block'
     ifbuild=true
 });
-grass.addEventListener('mousedown',(event)=>{
+grass.addEventListener('mousedown',()=>{
     if (ifbuild){
-        if (event.button===0){
-            //
-        }else if(event.button===2){
-            ifbuild=false;
-        }
+        //
+        ifbuild=false;
     }
 });
+nobuild.addEventListener('click',()=>{
+    ifbuild=false
+    nobuild.style.display='none'
+})
