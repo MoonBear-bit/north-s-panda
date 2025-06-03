@@ -112,6 +112,7 @@ let ifwar=false;
 let ifmouseinthebuildwhat=false
 let ifbuild=false
 let enemy=[]
+let warman_num=0
 popki.style.display='none';
 golder.style.display='none';
 tree_num.style.display='none';
@@ -241,7 +242,14 @@ function create_enemy(n,nhp,npower,nspeed){
                 scream.play()
                 if (creater.hp<0){
                     creater.remove()
-                    enemy.splice(indexOf(creater),1)
+                    enemy=enemy.filter(e=>e!==creater);
+                    warman_num-=1
+                    if (warman_num<1){
+                        ifwar=false
+                        music.play()
+                        war_music.pause()
+                        war_music.currentTime=0
+                    }
                 }
             }
         }
@@ -249,7 +257,6 @@ function create_enemy(n,nhp,npower,nspeed){
     
 }
 function the_first_war(){
-    let warman_num=0
     for(var i=0;i<3;i++){
         create_enemy(warman_num,3,1,1)
         warman_num+=1
@@ -265,7 +272,7 @@ function the_first_war(){
 function startwar(){
     setTimeout(()=>{
         the_first_war()
-    },100000);
+    },10000);
 }
 StartButton.addEventListener('click',()=>{
     let name='튜토리얼'
@@ -451,10 +458,10 @@ function create_diamond(){
     
 }
 function math(elem1,elem2){
-    let x1=parseInt(elem1.style.left)+35;
-    let y1=parseInt(elem1.style.top)+35;
-    let x2=parseInt(elem2.style.left)+35;
-    let y2=parseInt(elem2.style.top)+35
+    let x1=parseInt(elem1.style.left);
+    let y1=parseInt(elem1.style.top);
+    let x2=parseInt(elem2.style.left);
+    let y2=parseInt(elem2.style.top)
     let dx=x1-x2;
     let dy=y1-y2;
     return Math.sqrt(dx*dx+dy*dy);
@@ -556,15 +563,16 @@ function yee(){
                 what_the_small=ii
             }
         }
-        if (all[what_the_small].style.left<enemy[i].style.left){
-            enemy[i].style.left-=enemy[i].speed
+        console.log(all[what_the_small], what_the_small)
+        if (parseInt(all[what_the_small].style.left.replace('px',''))<parseInt(enemy[i].style.left.replace('px',''))){
+            enemy[i].style.left=String(parseInt(enemy[i].style.left.replace('px',''))-enemy[i].speed)+'px'
         }else{
-            enemy[i].style.left+=enemy[i].speed
+            enemy[i].style.left=String(parseInt(enemy[i].style.left.replace('px',''))+enemy[i].speed)+'px'
         }
-        if (all[what_the_small].style.top<enemy[i].style.top){
-            enemy[i].style.top-=enemy[i].speed
+        if (parseInt(all[what_the_small].style.top.replace('px',''))<parseInt(enemy[i].style.top.replace('px',''))){
+            enemy[i].style.top=String(parseInt(enemy[i].style.top.replace('px',''))-enemy[i].speed)+'px'
         }else{
-            enemy[i].style.top+=enemy[i].speed
+            enemy[i].style.top=String(parseInt(enemy[i].style.top.replace('px',''))+enemy[i].speed)+'px'
         }
     }
     for (var i=0;i<all.length;i++){
@@ -573,11 +581,13 @@ function yee(){
                 all[i].hp-=enemy[ii].power
                 damage.play()
                 ifhit=false
-                if(all[i].hp<0){
-                    all[i].remove()
-                    all.splice(i,1)
-                }
             }
+        }
+    }
+    for (var i=0;i<all.length;i++){
+        if (all[i].hp<0){
+            all[i].remove()
+            all=all.filter(e=>e!==all[i]);
         }
     }
     techtree_in_1.textContent=house_[house_what]+' '+need_diamond[0]
