@@ -730,6 +730,7 @@ function build_what_move(){
 techtree_in_1.addEventListener('click',()=>{
     if (diamond>need_diamond[0]-1 && house_what<5){
         house_what+=1
+        diamondsound.play()
         diamond-=need_diamond[0]
         need_diamond[0]=need_diamond[0]*3
         house[house_[house_what-1]]=true
@@ -738,6 +739,7 @@ techtree_in_1.addEventListener('click',()=>{
 techtree_in_2.addEventListener('click',()=>{
     if (diamond>need_diamond[1]-1 && yosae_what<5){
         yosae_what+=1
+        diamondsound.play()
         diamond-=need_diamond[1]
         need_diamond[1]=need_diamond[1]*3
         yosae[yosae_[yosae_what-1]]=true
@@ -746,6 +748,7 @@ techtree_in_2.addEventListener('click',()=>{
 techtree_in_3.addEventListener('click',()=>{
     if (diamond>need_diamond[2]-1 && sangsan_what<4){
         sangsan_what+=1
+        diamondsound.play()
         diamond-=need_diamond[2]
         need_diamond[2]=need_diamond[2]*3
         sangsan[sangsan_[sangsan_what-1]]=true
@@ -754,6 +757,7 @@ techtree_in_3.addEventListener('click',()=>{
 techtree_in_4.addEventListener('click',()=>{
     if (diamond>need_diamond[3]-1 && doback_what<3){
         doback_what+=1
+        diamondsound.play()
         diamond-=need_diamond[3]
         need_diamond[3]=need_diamond[3]*3
         doback[doback_[doback_what-1]]=true
@@ -762,6 +766,7 @@ techtree_in_4.addEventListener('click',()=>{
 techtree_in_5.addEventListener('click',()=>{
     if (diamond>need_diamond[4]-1 && cheeryo_what<4){
         cheeryo_what+=1
+        diamondsound.play()
         diamond-=need_diamond[4]
         need_diamond[4]=need_diamond[4]*3
         cheeryo[cheeryo_[cheeryo_what-1]]=true
