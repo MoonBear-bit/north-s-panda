@@ -106,7 +106,7 @@ body{
 }
 .StartButton{
     position: absolute;
-    top: 45vh;
+    top: 63vh;
     left: 46vw;
     height: 8vh;
     width: 10vw;
@@ -445,7 +445,8 @@ body{
     height: 100vh;
     background-color: black;
     border: 0px;
-    color: black;
+    color: white;
+    font-size: 10vh;
     z-index: 2;
     background-image: url("../Image/us_okey.png");
     background-size: 100vw 100vh;
