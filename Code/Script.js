@@ -25,6 +25,9 @@ let build=document.getElementById('build');
 let buildbutton=document.getElementById('buildbutton');
 let build_what=document.getElementById('build_what');
 let nobuild=document.getElementById('nobuild')
+let time=document.getElementById('time')
+let timebutton=document.getElementById('timebutton')
+let diedimg=document.getElementById('died')
 document.querySelectorAll('[id="span"]').forEach(el=>{
   el.style.display='none';
 });
@@ -44,6 +47,7 @@ let credits_music=new Audio('Sound/main.mp3')
 let war_music=new Audio('Sound/war.mp3')
 let scream=new Audio('Sound/scream.mp3')
 let damage=new Audio('Sound/damage.mp3')
+let diedsound=new Audio('Sound/died.mp3')
 let ifstart=false;
 let ifcredits=false;
 let money=0;
@@ -114,6 +118,7 @@ let ifmouseinthebuildwhat=false
 let ifbuild=false
 let enemy=[]
 let warman_num=0
+let until_time=0
 popki.style.display='none';
 golder.style.display='none';
 tree_num.style.display='none';
@@ -138,9 +143,16 @@ buildbutton.style.display='none';
 build_what.style.display='none'
 startimg.style.display='block'
 nobuild.style.display='none'
+time.style.display='none'
+timebutton.style.display='none'
+diedimg.style.display='none'
 music.volume=0.8
 credits_music.volume=0.3
+war_music.volume=0.5
 let need_money=null;
+async function wait(timeout){
+    await new Promise(resolve=>setTimeout(resolve(),timeout));
+}
 function starttutorial(){
     alert('There is an earthworm in front of you.')
     alert('Click on the worm. and click again to move it to the location you want it to be moved to.')
@@ -187,7 +199,7 @@ function update(){
         iftechtreebutton.style.display='block';
         iftechtreebutton_second.style.display='block';
         buildbutton.style.display='block';
-        //techtree.style.display='block';
+        timebutton.style.display='block'
         gold_make();
         tree_make();
         rock_make();
@@ -224,6 +236,14 @@ buildbutton.addEventListener('click',()=>{
         build.style.display='block'
     }
 });
+timebutton.addEventListener('click',()=>{
+    if (time.style.display=='block'){
+        time.style.display='none'
+    }else{
+        time.style.display='block'
+    }
+});
+let war_num=1
 function create_enemy(n,nhp,npower,nspeed){
     const creater=document.createElement("button");
     creater.id=n;
@@ -251,6 +271,12 @@ function create_enemy(n,nhp,npower,nspeed){
                         music.play()
                         war_music.pause()
                         war_music.currentTime=0
+                        if (war_num==1){
+                            the_second_war()
+                        }
+                        if (war_num==2){
+                            the_third_war()
+                        }
                     }
                 }
             }
@@ -258,7 +284,30 @@ function create_enemy(n,nhp,npower,nspeed){
     });
     
 }
+function the_third_war(){
+    until_time=100
+    warman_num=0
+    setTimeout(()=>{
+        war_num=3
+        for(var i=0;i<10;i++){
+            create_enemy(warman_num,5,2,1)
+            warman_num+=1
+        }
+    }, 100000);
+}
+function the_second_war(){
+    until_time=50
+    warman_num=0
+    setTimeout(()=>{
+        war_num=2
+        for(var i=0;i<6;i++){
+            create_enemy(warman_num,5,1,1)
+            warman_num+=1
+        }
+    }, 50000);
+}
 function the_first_war(){
+    warman_num=0
     for(var i=0;i<3;i++){
         create_enemy(warman_num,3,1,1)
         warman_num+=1
@@ -272,6 +321,7 @@ function the_first_war(){
     })
 }
 function startwar(){
+    until_time=10
     setTimeout(()=>{
         the_first_war()
     },10000);
@@ -313,7 +363,7 @@ function __random__(){
     }else if (random<num*8 && random>num*7){
         reterner=7;
     }else{
-        reterner='Nothing';
+        reterner=0;
     }
     return reterner;
 }   
@@ -513,7 +563,7 @@ function gold_make(){
     setTimeout(()=>{
         create_gold();
         gold_make();
-    },Math.floor(5000+(Math.random()*(15000-5000))))
+    },Math.floor(1000+(Math.random()*(8000-1000))))
 }
 function tree_make(){
     setTimeout(()=>{
@@ -531,7 +581,7 @@ function diamond_make(){
     setTimeout(()=>{
         create_diamond();
         diamond_make();
-    },Math.floor(50000+(Math.random()*(150000-50000))))
+    },Math.floor(6500+(Math.random()*(20000-6500))))
 }
 popki.addEventListener('click',()=>{
     if (gold>=need_money){
@@ -557,26 +607,52 @@ let ifhit=true
 damage.addEventListener('ended',()=>{
     ifhit=true;
 });
+function set(){
+    setTimeout(() => {
+        if (until_time>0){
+            until_time-=1
+        }
+        set()
+    }, 1000);
+}
+set()
+function died(){
+    diedsound.play()
+    diedsound.addEventListener('ended',()=>{
+        diedsound.play();
+    });
+    diedimg.style.display='block'
+}
 function yee(){
-    for (var i=0;i<enemy.length;i++){
-        let what_the_small=0
-        for (var ii=0;ii<all.length;ii++){
-            if (math(enemy[i],all[ii])<math(enemy[i],all[what_the_small])){
-                what_the_small=ii
+    if (all.length==0 && ifstart){
+        ifstart=false
+        war_music.pause()
+        music.pause()
+        credits_music.pause()
+        died()
+    }
+    if (all.length!=0){
+        for (var i=0;i<enemy.length;i++){
+            let what_the_small=0
+            for (var ii=0;ii<all.length;ii++){
+                if (math(enemy[i],all[ii])<math(enemy[i],all[what_the_small])){
+                    what_the_small=ii
+                }
+            }
+            console.log(all[what_the_small], what_the_small)
+            if (parseInt(all[what_the_small].style.left.replace('px',''))<parseInt(enemy[i].style.left.replace('px',''))){
+                enemy[i].style.left=String(parseInt(enemy[i].style.left.replace('px',''))-enemy[i].speed)+'px'
+            }else{
+                enemy[i].style.left=String(parseInt(enemy[i].style.left.replace('px',''))+enemy[i].speed)+'px'
+            }
+            if (parseInt(all[what_the_small].style.top.replace('px',''))<parseInt(enemy[i].style.top.replace('px',''))){
+                enemy[i].style.top=String(parseInt(enemy[i].style.top.replace('px',''))-enemy[i].speed)+'px'
+            }else{
+                enemy[i].style.top=String(parseInt(enemy[i].style.top.replace('px',''))+enemy[i].speed)+'px'
             }
         }
-        console.log(all[what_the_small], what_the_small)
-        if (parseInt(all[what_the_small].style.left.replace('px',''))<parseInt(enemy[i].style.left.replace('px',''))){
-            enemy[i].style.left=String(parseInt(enemy[i].style.left.replace('px',''))-enemy[i].speed)+'px'
-        }else{
-            enemy[i].style.left=String(parseInt(enemy[i].style.left.replace('px',''))+enemy[i].speed)+'px'
-        }
-        if (parseInt(all[what_the_small].style.top.replace('px',''))<parseInt(enemy[i].style.top.replace('px',''))){
-            enemy[i].style.top=String(parseInt(enemy[i].style.top.replace('px',''))-enemy[i].speed)+'px'
-        }else{
-            enemy[i].style.top=String(parseInt(enemy[i].style.top.replace('px',''))+enemy[i].speed)+'px'
-        }
     }
+    
     for (var i=0;i<all.length;i++){
         for (var ii=0;ii<enemy.length;ii++){
             if (math(all[i],enemy[ii])<70 && ifhit){
@@ -588,8 +664,10 @@ function yee(){
     }
     for (var i=0;i<all.length;i++){
         if (all[i].hp<0){
+            let target=all[i]
             all[i].remove()
-            all=all.filter(e=>e!==all[i]);
+            all.splice(all.indexOf(target),1)
+            //all=all.filter(e=>e!==target);
         }
     }
     techtree_in_1.textContent=house_[house_what]+' '+need_diamond[0]
@@ -628,6 +706,11 @@ function yee(){
         buildbutton.style.left='0vw'
         build_what.style.display='none'
     }
+    if (time.style.display=='block'){
+        timebutton.style.top='10vh'
+    }else{
+        timebutton.style.top='0vh'
+    }
     if (follow.includes(true)){
         grass.style.cursor='crosshair';
     }else{
@@ -639,6 +722,7 @@ function yee(){
     tree_num.textContent=String(tree);
     rock_num.textContent=String(rock);
     diamond_num.textContent=String(diamond);
+    time.textContent='Until the next wave       '+until_time+"sec"
     for (var i=0; i<all.length; i++){
         var l=parseInt(all[i].style.left.replace('px',''))+35;
         var t=parseInt(all[i].style.top.replace('px',''))+35;
@@ -662,6 +746,11 @@ function start_credits(){
 function build_what_move(){
     if (build_what.textContent=='null'){
         build_what.textContent=wheels[0]
+        if (house[build_what.textContent]){
+            build_what.style.border='5px solid cyan'
+        }else{
+            build_what.style.border='5px solid red'
+        }
     }else{
         var what_the_textContent_in_build_what=null
         what_the_textContent_in_build_what=wheels[wheels.indexOf(build_what.textContent)]
@@ -676,6 +765,11 @@ function build_what_move(){
                     build_what.textContent=house_[house_.indexOf(what_the_textContent_in_build_what)+1]
                 }
             }
+            if (house[build_what.textContent]){
+                build_what.style.border='5px solid cyan'
+            }else{
+                build_what.style.border='5px solid red'
+            }
         }
         if (yosae_.includes(what_the_textContent_in_build_what)){
             if (what_the_textContent_in_build_what==yosae_[yosae_.length-2]){
@@ -687,6 +781,11 @@ function build_what_move(){
                 else{
                     build_what.textContent=yosae_[yosae_.indexOf(what_the_textContent_in_build_what)+1]
                 }
+            }
+            if (yosae[build_what.textContent]){
+                build_what.style.border='5px solid cyan'
+            }else{
+                build_what.style.border='5px solid red'
             }
         }
         if (sangsan_.includes(what_the_textContent_in_build_what)){
@@ -700,6 +799,11 @@ function build_what_move(){
                     build_what.textContent=sangsan_[sangsan_.indexOf(what_the_textContent_in_build_what)+1]
                 }
             }
+            if (sangsan[build_what.textContent]){
+                build_what.style.border='5px solid cyan'
+            }else{
+                build_what.style.border='5px solid red'
+            }
         }
         if (doback_.includes(what_the_textContent_in_build_what)){
             if (what_the_textContent_in_build_what==doback_[doback_.length-2]){
@@ -712,6 +816,11 @@ function build_what_move(){
                     build_what.textContent=doback_[doback_.indexOf(what_the_textContent_in_build_what)+1]
                 }
             }
+            if (doback[build_what.textContent]){
+                build_what.style.border='5px solid cyan'
+            }else{
+                build_what.style.border='5px solid red'
+            }
         }
         if (cheeryo_.includes(what_the_textContent_in_build_what)){
             if (what_the_textContent_in_build_what==cheeryo_[cheeryo_.length-2]){
@@ -723,6 +832,11 @@ function build_what_move(){
                 else{
                     build_what.textContent=cheeryo_[cheeryo_.indexOf(what_the_textContent_in_build_what)+1]
                 }
+            }
+            if (cheeryo[build_what.textContent]){
+                build_what.style.border='5px solid cyan'
+            }else{
+                build_what.style.border='5px solid red'
             }
         }
     }

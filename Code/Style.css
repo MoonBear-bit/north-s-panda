@@ -513,3 +513,42 @@ body{
     z-index: 100;
     cursor: pointer;
 }
+.time{
+    position: absolute;
+    top: 0vh;
+    left: 50vw;
+    width: 10vw;
+    height: 10vh;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    font-size: 2.2vh;
+    z-index: 26;
+}
+.timebutton{
+    position: absolute;
+    top: 0vh;
+    left: 50vw;
+    width: 5vw;
+    height: 5vh;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    font-size: 2vh;
+    z-index: 25;
+    cursor: pointer;
+}
+.died{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    background-image: url("../Image/died.png");
+    background-size: 100vw 100vh;
+    color: white;
+    font-size: 10vh;
+    z-index: 100;
+    cursor: grab;
+}
