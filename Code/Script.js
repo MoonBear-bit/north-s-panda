@@ -28,6 +28,7 @@ let nobuild=document.getElementById('nobuild')
 let time=document.getElementById('time')
 let timebutton=document.getElementById('timebutton')
 let diedimg=document.getElementById('died')
+let noi=document.getElementById('noi')
 document.querySelectorAll('[id="span"]').forEach(el=>{
   el.style.display='none';
 });
@@ -154,6 +155,10 @@ let need_money=null;
 async function wait(timeout){
     await new Promise(resolve=>setTimeout(resolve(),timeout));
 }
+noi.addEventListener('click',()=>{
+    noi.style.display='none'
+    opener.play()
+})
 function starttutorial(){
     alert('There is an earthworm in front of you.')
     alert('Click on the worm. and click again to move it to the location you want it to be moved to.')
@@ -215,7 +220,6 @@ function update(){
         startimg.style.display='none'
         start_credits();
     }else{
-        opener.play()
         StartButton.style.display="block";
         credits.style.display="block";
     }
