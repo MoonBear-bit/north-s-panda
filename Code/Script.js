@@ -170,7 +170,7 @@ function starttutorial(){
 opener.addEventListener('ended',()=>{
     opener.play()
 })
-opener.play()
+
 yes.addEventListener('click', (()=>{
     starttutorial();
     alerts.style.display='none';
@@ -215,6 +215,7 @@ function update(){
         startimg.style.display='none'
         start_credits();
     }else{
+        opener.play()
         StartButton.style.display="block";
         credits.style.display="block";
     }
