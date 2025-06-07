@@ -48,6 +48,7 @@ let war_music=new Audio('Sound/war.mp3')
 let scream=new Audio('Sound/scream.mp3')
 let damage=new Audio('Sound/damage.mp3')
 let diedsound=new Audio('Sound/died.mp3')
+let opener=new Audio('Sound/opener.mp3')
 let ifstart=false;
 let ifcredits=false;
 let money=0;
@@ -166,6 +167,10 @@ function starttutorial(){
     alert('Are you ready?')
     alert('Go.')
 }
+opener.addEventListener('ended',()=>{
+    opener.play()
+})
+opener.play()
 yes.addEventListener('click', (()=>{
     starttutorial();
     alerts.style.display='none';
@@ -330,6 +335,7 @@ StartButton.addEventListener('click',()=>{
     let name='튜토리얼'
     what_(name);
     ifstart=true;
+    opener.pause()
     music.play();
     update();
     startwar()
@@ -337,6 +343,7 @@ StartButton.addEventListener('click',()=>{
 credits.addEventListener('click',()=>{
     ifcredits=true;
     update();
+    opener.pause()
 })
 music.addEventListener('ended',()=>{
     music.play();
