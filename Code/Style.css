@@ -489,6 +489,19 @@ body{
     z-index: 27;
     cursor: pointer;
 }
+.build_next{
+    position: absolute;
+    top: 40vh;
+    left: 21vw;
+    width: 5vw;
+    height: 2vw;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    font-size: 2vh;
+    z-index: 27;
+    cursor: pointer;
+}
 .enemy{
     position: absolute;    
     height: 75px;
@@ -496,6 +509,28 @@ body{
     background-color: black;
     background-image: url("../Image/Hunter.png");
     background-size: 75px 75px;
+    color: white;
+    cursor: pointer;
+    z-index: 5;
+}
+.enemy_bow{
+    position: absolute;    
+    height: 85px;
+    width: 85px;
+    background-color: black;
+    background-image: url("../Image/Hunter_Bow.png");
+    background-size: 85px 85px;
+    color: white;
+    cursor: pointer;
+    z-index: 5;
+}
+.TheRifleHunter{
+    position: absolute;    
+    height: 110px;
+    width: 110px;
+    background-color: black;
+    background-image: url("../Image/Hunter_Rifle.png");
+    background-size: 110px 110px;
     color: white;
     cursor: pointer;
     z-index: 5;

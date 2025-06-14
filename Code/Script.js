@@ -24,6 +24,7 @@ let techtree2_in_2=document.getElementById('techtree2_in_2');
 let build=document.getElementById('build');
 let buildbutton=document.getElementById('buildbutton');
 let build_what=document.getElementById('build_what');
+let build_next=document.getElementById('build_next')
 let nobuild=document.getElementById('nobuild')
 let time=document.getElementById('time')
 let timebutton=document.getElementById('timebutton')
@@ -48,6 +49,7 @@ let credits_music=new Audio('Sound/main.mp3')
 let war_music=new Audio('Sound/war.mp3')
 let scream=new Audio('Sound/scream.mp3')
 let damage=new Audio('Sound/damage.mp3')
+let damage_time=new Audio('Sound/damage.mp3')
 let diedsound=new Audio('Sound/died.mp3')
 let opener=new Audio('Sound/opener.mp3')
 let ifstart=false;
@@ -59,6 +61,7 @@ let trees=[];
 let rocks=[];
 let diamonds=[];
 let entity=['Northpolebear','Firebear','Whatgo','Fiveridecoo','Twistworm','Realdotdog','Blackpig','Silverlongfish'];
+let boss_entity=['TheRifleHunter','','','','','','','','']
 let entity_all={
     Northpolebear_all:{power:3,speed:1,get:1,create:1},
     Firebear_all:{power:3,speed:1,get:1,create:1},
@@ -119,6 +122,8 @@ let ifwar=false;
 let ifmouseinthebuildwhat=false
 let ifbuild=false
 let enemy=[]
+let enemy_bow=[]
+let enemy_rifle
 let warman_num=0
 let until_time=0
 popki.style.display='none';
@@ -255,7 +260,7 @@ timebutton.addEventListener('click',()=>{
 });
 let war_num=1
 function create_enemy(n,nhp,npower,nspeed){
-    const creater=document.createElement("button");
+    let creater=document.createElement("button");
     creater.id=n;
     creater.hp=nhp
     creater.power=npower
@@ -287,12 +292,118 @@ function create_enemy(n,nhp,npower,nspeed){
                         if (war_num==2){
                             the_third_war()
                         }
+                        if (war_num==3){
+                            the_fourth_war()
+                        }
+                        if (war_num==4){
+                            the_fifth_war_boss()
+                        }
                     }
                 }
             }
         }
     });
     
+}
+function create_bow_enemy(n,nhp,npower){
+    let creater=document.createElement("button");
+    creater.id=n;
+    creater.hp=nhp
+    creater.power=npower
+    creater.speed=nspeed
+    creater.className='enemy_bow';
+    creater.type="button";
+    creater.style.position="absolute";
+    creater.style.left=String(Math.floor(Math.random()*(window.innerWidth-151)))+'px';
+    creater.style.top=String(Math.floor(100+Math.random()*(window.innerHeight-300)))+'px';
+    document.body.appendChild(creater);
+    enemy_bow.push(creater);
+    creater.addEventListener('click',()=>{
+        for(var i=0;i<all.length;i++){
+            if (math(creater,all[i])<200){
+                creater.hp-=entity_all[all[i].id+'_all']['power']
+                scream.play()
+                if (creater.hp<0){
+                    creater.remove()
+                    enemy_bow=enemy_bow.filter(e=>e!==creater);
+                    warman_num-=1
+                    if (warman_num<1){
+                        ifwar=false
+                        music.play()
+                        war_music.pause()
+                        war_music.currentTime=0
+                        if (war_num==4){
+                            the_fifth_war_boss()
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+}
+function create_boss_enemy_TheRifleHunter(n,nhp,npower,nspeed){
+    let creater=document.createElement("button");
+    creater.id=n;
+    creater.hp=nhp
+    creater.power=npower
+    creater.className='TheRifleHunter';
+    creater.type="button";
+    creater.style.position="absolute";
+    creater.style.left=String(Math.floor(Math.random()*(window.innerWidth-151)))+'px';
+    creater.style.top=String(Math.floor(100+Math.random()*(window.innerHeight-300)))+'px';
+    document.body.appendChild(creater);
+    enemy_bow.push(creater);
+    creater.addEventListener('click',()=>{
+        for(var i=0;i<all.length;i++){
+            if (math(creater,all[i])<200){
+                creater.hp-=entity_all[all[i].id+'_all']['power']
+                scream.play()
+                if (creater.hp<0){
+                    creater.remove()
+                    enemy_bow=enemy_bow.filter(e=>e!==creater);
+                    warman_num-=1
+                    if (warman_num<1){
+                        ifwar=false
+                        music.play()
+                        war_music.pause()
+                        war_music.currentTime=0
+                        if (war_num==5){
+                            the_sixth_war()
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+}
+function the_sixth_war(){}
+function the_fifth_war_boss(){
+    until_time=150
+    warman_num=0
+    setTimeout(()=>{
+        for(var i=0;i<5;i++){
+            create_bow_enemy(warman_num,5,1)
+            warman_num+=1
+        }
+        create_boss_enemy_TheRifleHunter(warman_num,20,3,1)
+    }, 150000);
+}
+function the_fourth_war(){
+    until_time=100
+    warman_num=0
+    setTimeout(()=>{
+        war_num=4
+        for(var i=0;i<5;i++){
+            create_enemy(warman_num,5,1,2)
+            warman_num+=1
+        }
+        for(var i=0;i<5;i++){
+            create_bow_enemy(warman_num,3,1)
+            warman_num+=1
+        }
+    }, 100000);
 }
 function the_third_war(){
     until_time=100
@@ -322,6 +433,7 @@ function the_first_war(){
         create_enemy(warman_num,3,1,1)
         warman_num+=1
     }
+    create_bow_enemy(warman_num,3,1)
     ifwar=true
     music.pause()
     music.currentTime=0
@@ -380,24 +492,24 @@ function __random__(){
     return reterner;
 }   
 function create(wt){
-    const creater=document.createElement("button");
-    creater.id=wt;
-    creater.className=wt;
-    creater.type="button";
-    creater.style.position="absolute";
-    creater.hp=10
-    creater.power=0
-    creater.style.left=String(Math.floor(Math.random()*(window.innerWidth-151)))+'px';
-    creater.style.top=String(Math.floor(100+Math.random()*(window.innerHeight-300)))+'px';
-    document.body.appendChild(creater);
-    all.push(creater);
+    let createrplayer=document.createElement("button");
+    createrplayer.id=wt;
+    createrplayer.className=wt;
+    createrplayer.type="button";
+    createrplayer.style.position="absolute";
+    createrplayer.hp=10
+    createrplayer.power=0
+    createrplayer.style.left=String(Math.floor(Math.random()*(window.innerWidth-151)))+'px';
+    createrplayer.style.top=String(Math.floor(100+Math.random()*(window.innerHeight-300)))+'px';
+    document.body.appendChild(createrplayer);
+    all.push(createrplayer);
     follow=[]
     for (var i=0; i<all.length; i++){
         follow.push(false);
     }
     follow.push(false);
     const i_=all.length-1
-    creater.addEventListener('click',()=>{
+    createrplayer.addEventListener('click',()=>{
         if (follow[i_]===true){
             follow[i_]=false
         }else{
@@ -619,6 +731,11 @@ let ifhit=true
 damage.addEventListener('ended',()=>{
     ifhit=true;
 });
+damage_time.addEventListener('ended',()=>{
+    setTimeout(() => {
+        ifhit=true
+    }, 100);
+})
 function set(){
     setTimeout(() => {
         if (until_time>0){
@@ -635,7 +752,30 @@ function died(){
     });
     diedimg.style.display='block'
 }
-function yee(){
+function moveEnemy(enemys){
+    if (all.length!=0){
+        for (var i=0;i<enemys.length;i++){
+            let what_the_small=0
+            for (var ii=0;ii<all.length;ii++){
+                if (math(enemys[i],all[ii])<math(enemys[i],all[what_the_small])){
+                    what_the_small=ii
+                }
+            }
+            console.log(all[what_the_small], what_the_small)
+            if (parseInt(all[what_the_small].style.left.replace('px',''))<parseInt(enemys[i].style.left.replace('px',''))){
+                enemys[i].style.left=String(parseInt(enemys[i].style.left.replace('px',''))-enemys[i].speed)+'px'
+            }else{
+                enemys[i].style.left=String(parseInt(enemys[i].style.left.replace('px',''))+enemys[i].speed)+'px'
+            }
+            if (parseInt(all[what_the_small].style.top.replace('px',''))<parseInt(enemys[i].style.top.replace('px',''))){
+                enemys[i].style.top=String(parseInt(enemys[i].style.top.replace('px',''))-enemys[i].speed)+'px'
+            }else{
+                enemys[i].style.top=String(parseInt(enemys[i].style.top.replace('px',''))+enemys[i].speed)+'px'
+            }
+        }
+    }
+}
+function whatdied(){
     if (all.length==0 && ifstart){
         ifstart=false
         war_music.pause()
@@ -643,28 +783,10 @@ function yee(){
         credits_music.pause()
         died()
     }
-    if (all.length!=0){
-        for (var i=0;i<enemy.length;i++){
-            let what_the_small=0
-            for (var ii=0;ii<all.length;ii++){
-                if (math(enemy[i],all[ii])<math(enemy[i],all[what_the_small])){
-                    what_the_small=ii
-                }
-            }
-            console.log(all[what_the_small], what_the_small)
-            if (parseInt(all[what_the_small].style.left.replace('px',''))<parseInt(enemy[i].style.left.replace('px',''))){
-                enemy[i].style.left=String(parseInt(enemy[i].style.left.replace('px',''))-enemy[i].speed)+'px'
-            }else{
-                enemy[i].style.left=String(parseInt(enemy[i].style.left.replace('px',''))+enemy[i].speed)+'px'
-            }
-            if (parseInt(all[what_the_small].style.top.replace('px',''))<parseInt(enemy[i].style.top.replace('px',''))){
-                enemy[i].style.top=String(parseInt(enemy[i].style.top.replace('px',''))-enemy[i].speed)+'px'
-            }else{
-                enemy[i].style.top=String(parseInt(enemy[i].style.top.replace('px',''))+enemy[i].speed)+'px'
-            }
-        }
-    }
-    
+}
+function yee(){
+    whatdied()
+    moveEnemy(enemy);
     for (var i=0;i<all.length;i++){
         for (var ii=0;ii<enemy.length;ii++){
             if (math(all[i],enemy[ii])<70 && ifhit){
@@ -675,11 +797,20 @@ function yee(){
         }
     }
     for (var i=0;i<all.length;i++){
+        for (var ii=0;ii<enemy_bow.length;ii++){
+            if (math(all[i],enemy_bow[ii])<250 && ifhit){
+                all[i].hp-=enemy_bow[ii].power
+                damage_time.play()
+                ifhit=false
+                
+            }
+        }
+    }
+    for (var i=0;i<all.length;i++){
         if (all[i].hp<0){
             let target=all[i]
             all[i].remove()
             all.splice(all.indexOf(target),1)
-            //all=all.filter(e=>e!==target);
         }
     }
     techtree_in_1.textContent=house_[house_what]+' '+need_diamond[0]
@@ -714,9 +845,11 @@ function yee(){
     if (build.style.display=='block'){
         buildbutton.style.left='50vw'
         build_what.style.display='block'
+        build_next.style.display='block'
     }else{
         buildbutton.style.left='0vw'
         build_what.style.display='none'
+        build_next.style.display='none'
     }
     if (time.style.display=='block'){
         timebutton.style.top='10vh'
@@ -909,15 +1042,8 @@ build_what.addEventListener('wheel',()=>{
         build_what_move()
     }
 });
-let kidaleem=true
-build_what.addEventListener('mousemove',()=>{
-    if (kidaleem){
-        build_what_move()
-        kidaleem=false
-        setTimeout(()=>{
-            kidaleem=true
-        },100)
-    }
+build_next.addEventListener('click',()=>{
+    build_what_move()
 })
 let iffirstbuild=true
 build_what.addEventListener('click',()=>{
