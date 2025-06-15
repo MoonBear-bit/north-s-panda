@@ -805,6 +805,9 @@ function SeeHP(){
     for (var i=0;i<all.length;i++){
         all[i].textContent=all[i].hp
     }
+    for (var i=0;i<enemy.length;i++){
+        enemy[i].textContent=enemy[i].hp
+    }
 }
 function yee(){
     SeeHP()

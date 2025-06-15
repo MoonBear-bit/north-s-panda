@@ -542,6 +542,10 @@ body{
     background-image: url("../Image/Hunter.png");
     background-size: 75px 75px;
     color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
     cursor: pointer;
     z-index: 5;
 }
@@ -553,6 +557,10 @@ body{
     background-image: url("../Image/Hunter_Bow.png");
     background-size: 85px 85px;
     color: white;
+    font-size: 20px;
+    padding: 0px 80px 80px 0px;
+    text-align: left;
+    vertical-align: top;
     cursor: pointer;
     z-index: 5;
 }
@@ -564,6 +572,10 @@ body{
     background-image: url("../Image/Hunter_Rifle.png");
     background-size: 110px 110px;
     color: white;
+    font-size: 20px;
+    padding: 0px 105px 105px 0px;
+    text-align: left;
+    vertical-align: top;
     cursor: pointer;
     z-index: 5;
 }
