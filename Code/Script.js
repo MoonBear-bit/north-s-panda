@@ -52,6 +52,8 @@ let damage=new Audio('Sound/damage.mp3')
 let damage_time=new Audio('Sound/damage.mp3')
 let diedsound=new Audio('Sound/died.mp3')
 let opener=new Audio('Sound/opener.mp3')
+let cancelsound=new Audio('Sound/cancel.mp3')
+let clicksound=new Audio('Sound/click.mp3')
 let ifstart=false;
 let ifcredits=false;
 let money=0;
@@ -73,7 +75,7 @@ let entity_all={
     Silverlongfish_all:{power:1,speed:1,get:1,create:3},
 }
 let house={
-    움집:false,
+    움집:true,
     초가집:false,
     성:false,
     주택:false,
@@ -82,7 +84,7 @@ let house={
 let house_=['움집','초가집','성','주택','국방부','end']
 let house_what=0
 let yosae={
-    토성:false,
+    토성:true,
     감시초소:false,
     탑:false,
     전망대:false,
@@ -91,7 +93,7 @@ let yosae={
 let yosae_=['토성','감시초소','탑','전망대','스나이퍼타워','end']
 let yosae_what=0
 let sangsan={
-    공방:false,
+    공방:true,
     대장간:false,
     공장:false,
     ai공장:false
@@ -99,14 +101,14 @@ let sangsan={
 let sangsan_=['공방','대장간','공장','ai공장','end']
 let sangsan_what=0
 let doback={
-    주점:false,
+    주점:true,
     아지트:false,
     카지노:false
 }
 let doback_=['주점','아지트','카지노','end']
 let doback_what=0
 let cheeryo={
-    온천:false,
+    온천:true,
     의원:false,
     동네병원:false,
     대학병원:false
@@ -182,6 +184,7 @@ opener.addEventListener('ended',()=>{
 })
 
 yes.addEventListener('click', (()=>{
+    clicksound.play()
     starttutorial();
     alerts.style.display='none';
     yes.style.display='none';
@@ -191,6 +194,7 @@ no.addEventListener('click', ()=>{
     alerts.style.display='none';
     yes.style.display='none';
     no.style.display='none';
+    clicksound.play()
 });
 function what_(name){
     alerts.style.display='block';
@@ -233,29 +237,37 @@ update();
 iftechtreebutton.addEventListener('click',()=>{
     if (techtree.style.display=='block'){
         techtree.style.display='none'
+        clicksound.play()
     }else{
         techtree.style.display='block'
+        clicksound.play()
     }
 });
 iftechtreebutton_second.addEventListener('click',()=>{
     if (techtree_second.style.display=='block'){
         techtree_second.style.display='none'
+        clicksound.play()
     }else{
         techtree_second.style.display='block'
+        clicksound.play()
     }
 });
 buildbutton.addEventListener('click',()=>{
     if (build.style.display=='block'){
         build.style.display='none'
+        clicksound.play()
     }else{
         build.style.display='block'
+        clicksound.play()
     }
 });
 timebutton.addEventListener('click',()=>{
     if (time.style.display=='block'){
         time.style.display='none'
+        clicksound.play()
     }else{
         time.style.display='block'
+        clicksound.play()
     }
 });
 let war_num=1
@@ -310,14 +322,14 @@ function create_bow_enemy(n,nhp,npower){
     creater.id=n;
     creater.hp=nhp
     creater.power=npower
-    creater.speed=nspeed
+    creater.speed=0
     creater.className='enemy_bow';
     creater.type="button";
     creater.style.position="absolute";
     creater.style.left=String(Math.floor(Math.random()*(window.innerWidth-151)))+'px';
     creater.style.top=String(Math.floor(100+Math.random()*(window.innerHeight-300)))+'px';
     document.body.appendChild(creater);
-    enemy_bow.push(creater);
+    enemy.push(creater);
     creater.addEventListener('click',()=>{
         for(var i=0;i<all.length;i++){
             if (math(creater,all[i])<200){
@@ -347,13 +359,14 @@ function create_boss_enemy_TheRifleHunter(n,nhp,npower,nspeed){
     creater.id=n;
     creater.hp=nhp
     creater.power=npower
+    creater.speed=nspeed
     creater.className='TheRifleHunter';
     creater.type="button";
     creater.style.position="absolute";
     creater.style.left=String(Math.floor(Math.random()*(window.innerWidth-151)))+'px';
     creater.style.top=String(Math.floor(100+Math.random()*(window.innerHeight-300)))+'px';
     document.body.appendChild(creater);
-    enemy_bow.push(creater);
+    enemy.push(creater);
     creater.addEventListener('click',()=>{
         for(var i=0;i<all.length;i++){
             if (math(creater,all[i])<200){
@@ -383,10 +396,11 @@ function the_fifth_war_boss(){
     until_time=150
     warman_num=0
     setTimeout(()=>{
-        for(var i=0;i<5;i++){
-            create_bow_enemy(warman_num,5,1)
+        for(var i=0;i<5;i++){ 
             warman_num+=1
+            create_bow_enemy(warman_num,5,1)
         }
+        warman_num+=1
         create_boss_enemy_TheRifleHunter(warman_num,20,3,1)
     }, 150000);
 }
@@ -396,12 +410,12 @@ function the_fourth_war(){
     setTimeout(()=>{
         war_num=4
         for(var i=0;i<5;i++){
-            create_enemy(warman_num,5,1,2)
             warman_num+=1
+            create_enemy(warman_num,5,1,2)
         }
         for(var i=0;i<5;i++){
-            create_bow_enemy(warman_num,3,1)
             warman_num+=1
+            create_bow_enemy(warman_num,3,1)
         }
     }, 100000);
 }
@@ -411,8 +425,8 @@ function the_third_war(){
     setTimeout(()=>{
         war_num=3
         for(var i=0;i<10;i++){
-            create_enemy(warman_num,5,2,1)
             warman_num+=1
+            create_enemy(warman_num,5,2,1)
         }
     }, 100000);
 }
@@ -422,18 +436,17 @@ function the_second_war(){
     setTimeout(()=>{
         war_num=2
         for(var i=0;i<6;i++){
-            create_enemy(warman_num,5,1,1)
             warman_num+=1
+            create_enemy(warman_num,5,1,1)
         }
     }, 50000);
 }
 function the_first_war(){
     warman_num=0
     for(var i=0;i<3;i++){
-        create_enemy(warman_num,3,1,1)
         warman_num+=1
+        create_enemy(warman_num,3,1,1)
     }
-    create_bow_enemy(warman_num,3,1)
     ifwar=true
     music.pause()
     music.currentTime=0
@@ -449,6 +462,7 @@ function startwar(){
     },10000);
 }
 StartButton.addEventListener('click',()=>{
+    clicksound.play()
     let name='튜토리얼'
     what_(name);
     ifstart=true;
@@ -711,6 +725,9 @@ popki.addEventListener('click',()=>{
     if (gold>=need_money){
         gold-=need_money;
         create(entity[__random__()]);
+        clicksound.play()
+    }else{
+        cancelsound.play()
     }
 });
 function move(i__,xxy,yyx,n_){
@@ -784,7 +801,13 @@ function whatdied(){
         died()
     }
 }
+function SeeHP(){
+    for (var i=0;i<all.length;i++){
+        all[i].textContent=all[i].hp
+    }
+}
 function yee(){
+    SeeHP()
     whatdied()
     moveEnemy(enemy);
     for (var i=0;i<all.length;i++){
@@ -902,6 +925,7 @@ function build_what_move(){
         if (house_.includes(what_the_textContent_in_build_what)){
             if (what_the_textContent_in_build_what==house_[house_.length-2]){
                 build_what.textContent=yosae_[0]
+                build_what.style.border='5px solid cyan'
             }else{
                 if (what_the_textContent_in_build_what==null){
                     build_what.textContent=house_[1]
@@ -909,16 +933,18 @@ function build_what_move(){
                 else{
                     build_what.textContent=house_[house_.indexOf(what_the_textContent_in_build_what)+1]
                 }
+                if (house[build_what.textContent]){
+                    build_what.style.border='5px solid cyan'
+                }else{
+                    build_what.style.border='5px solid red'
+                }
             }
-            if (house[build_what.textContent]){
-                build_what.style.border='5px solid cyan'
-            }else{
-                build_what.style.border='5px solid red'
-            }
+            
         }
         if (yosae_.includes(what_the_textContent_in_build_what)){
             if (what_the_textContent_in_build_what==yosae_[yosae_.length-2]){
                 build_what.textContent=sangsan_[0]
+                build_what.style.border='5px solid cyan'
             }else{
                 if (what_the_textContent_in_build_what==null){
                     build_what.textContent=yosae_[1]
@@ -926,16 +952,17 @@ function build_what_move(){
                 else{
                     build_what.textContent=yosae_[yosae_.indexOf(what_the_textContent_in_build_what)+1]
                 }
-            }
-            if (yosae[build_what.textContent]){
-                build_what.style.border='5px solid cyan'
-            }else{
-                build_what.style.border='5px solid red'
+                if (yosae[build_what.textContent]){
+                    build_what.style.border='5px solid cyan'
+                }else{
+                    build_what.style.border='5px solid red'
+                }
             }
         }
         if (sangsan_.includes(what_the_textContent_in_build_what)){
             if (what_the_textContent_in_build_what==sangsan_[sangsan_.length-2]){
                 build_what.textContent=doback_[0]
+                build_what.style.border='5px solid cyan'
             }else{
                 if (what_the_textContent_in_build_what==null){
                     build_what.textContent=sangsan_[1]
@@ -943,16 +970,18 @@ function build_what_move(){
                 else{
                     build_what.textContent=sangsan_[sangsan_.indexOf(what_the_textContent_in_build_what)+1]
                 }
+                if (sangsan[build_what.textContent]){
+                    build_what.style.border='5px solid cyan'
+                }else{
+                    build_what.style.border='5px solid red'
+                }
             }
-            if (sangsan[build_what.textContent]){
-                build_what.style.border='5px solid cyan'
-            }else{
-                build_what.style.border='5px solid red'
-            }
+            
         }
         if (doback_.includes(what_the_textContent_in_build_what)){
             if (what_the_textContent_in_build_what==doback_[doback_.length-2]){
                 build_what.textContent=cheeryo_[0]
+                build_what.style.border='5px solid cyan'
             }else{
                 if (what_the_textContent_in_build_what==null){
                     build_what.textContent=doback_[1]
@@ -960,16 +989,17 @@ function build_what_move(){
                 else{
                     build_what.textContent=doback_[doback_.indexOf(what_the_textContent_in_build_what)+1]
                 }
-            }
-            if (doback[build_what.textContent]){
-                build_what.style.border='5px solid cyan'
-            }else{
-                build_what.style.border='5px solid red'
+                if (doback[build_what.textContent]){
+                    build_what.style.border='5px solid cyan'
+                }else{
+                    build_what.style.border='5px solid red'
+                }
             }
         }
         if (cheeryo_.includes(what_the_textContent_in_build_what)){
             if (what_the_textContent_in_build_what==cheeryo_[cheeryo_.length-2]){
                 build_what.textContent=house_[0]
+                build_what.style.border='5px solid cyan'
             }else{
                 if (what_the_textContent_in_build_what==null){
                     build_what.textContent=cheeryo_[1]
@@ -977,12 +1007,13 @@ function build_what_move(){
                 else{
                     build_what.textContent=cheeryo_[cheeryo_.indexOf(what_the_textContent_in_build_what)+1]
                 }
+                if (cheeryo[build_what.textContent]){
+                    build_what.style.border='5px solid cyan'
+                }else{
+                    build_what.style.border='5px solid red'
+                }
             }
-            if (cheeryo[build_what.textContent]){
-                build_what.style.border='5px solid cyan'
-            }else{
-                build_what.style.border='5px solid red'
-            }
+            
         }
     }
 }
@@ -993,6 +1024,8 @@ techtree_in_1.addEventListener('click',()=>{
         diamond-=need_diamond[0]
         need_diamond[0]=need_diamond[0]*3
         house[house_[house_what-1]]=true
+    }else{
+        cancelsound.play()
     }
 });
 techtree_in_2.addEventListener('click',()=>{
@@ -1002,6 +1035,8 @@ techtree_in_2.addEventListener('click',()=>{
         diamond-=need_diamond[1]
         need_diamond[1]=need_diamond[1]*3
         yosae[yosae_[yosae_what-1]]=true
+    }else{
+        cancelsound.play()
     }
 });
 techtree_in_3.addEventListener('click',()=>{
@@ -1011,6 +1046,8 @@ techtree_in_3.addEventListener('click',()=>{
         diamond-=need_diamond[2]
         need_diamond[2]=need_diamond[2]*3
         sangsan[sangsan_[sangsan_what-1]]=true
+    }else{
+        cancelsound.play()
     }
 });
 techtree_in_4.addEventListener('click',()=>{
@@ -1020,6 +1057,8 @@ techtree_in_4.addEventListener('click',()=>{
         diamond-=need_diamond[3]
         need_diamond[3]=need_diamond[3]*3
         doback[doback_[doback_what-1]]=true
+    }else{
+        cancelsound.play()
     }
 });
 techtree_in_5.addEventListener('click',()=>{
@@ -1029,6 +1068,8 @@ techtree_in_5.addEventListener('click',()=>{
         diamond-=need_diamond[4]
         need_diamond[4]=need_diamond[4]*3
         cheeryo[cheeryo_[cheeryo_what-1]]=true
+    }else{
+        cancelsound.play()
     }
 });
 build_what.addEventListener('mouseenter',()=>{
@@ -1040,29 +1081,41 @@ build_what.addEventListener('mouseleave',()=>{
 build_what.addEventListener('wheel',()=>{
     if (ifmouseinthebuildwhat){
         build_what_move()
+        clicksound.play()
     }
 });
 build_next.addEventListener('click',()=>{
     build_what_move()
+    clicksound.play()
 })
 let iffirstbuild=true
 build_what.addEventListener('click',()=>{
-    build.style.display='none'
-    buildbutton.style.left='0vw'
-    if (iffirstbuild){
-        alert('Click to build. Right click to cancel.')
-        iffirstbuild=false
+    if (house[build_what.textContent] | yosae[build_what.textContent] | sangsan[build_what.textContent] |
+        doback[build_what.textContent] | cheeryo[build_what.textContent]){
+        build.style.display='none'
+        buildbutton.style.left='0vw'
+        clicksound.play()
+        if (iffirstbuild){
+            alert('Click to build. Right click to cancel.')
+            iffirstbuild=false
+        }
+        nobuild.style.display='block'
+        ifbuild=true
+    }else{
+        cancelsound.play()
     }
-    nobuild.style.display='block'
-    ifbuild=true
+    
 });
-grass.addEventListener('mousedown',()=>{
+grass.addEventListener('click',()=>{
     if (ifbuild){
-        //
+        thebuild()
         ifbuild=false;
+        clicksound.play()
     }
 });
 nobuild.addEventListener('click',()=>{
     ifbuild=false
     nobuild.style.display='none'
+    cancelsound.play()
 })
+function thebuild(){}
