@@ -1394,7 +1394,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         }
     }
     function blockandnone(){
-        htree_in_1.textContent=house_[house_what]+' '+need_diamond[0]
+        techtree_in_1.textContent=house_[house_what]+' '+need_diamond[0]
         techtree_in_2.textContent=yosae_[yosae_what]+' '+need_diamond[1]
         techtree_in_3.textContent=sangsan_[sangsan_what]+' '+need_diamond[2]
         techtree_in_4.textContent=doback_[doback_what]+' '+need_diamond[3]
