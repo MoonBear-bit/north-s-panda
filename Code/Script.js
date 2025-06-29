@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     let timebutton=document.getElementById('timebutton')
     let diedimg=document.getElementById('died')
     let noi=document.getElementById('noi')
-    document.querySelectorAll('[class="span"]').forEach(el=>{
+    document.querySelectorAll('.span').forEach(el=>{
     el.style.display='none';
     });
     let gold=0;
