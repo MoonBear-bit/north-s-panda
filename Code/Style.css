@@ -1,0 +1,622 @@
+body{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    background-color: rgb(0,0,0);
+    z-index: 0;
+}
+.Silverlongfish{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url("../Image/Silverlongfish.png");
+    background-size: 70px 70px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 5;
+}
+.Blackpig{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url("../Image/Blackpig.png");
+    background-size: 70px 70px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 5;
+}
+.Realdotdog{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url("../Image/Realdotdog.png");
+    background-size: 70px 70px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 5;
+}
+.Twistworm{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url("../Image/Twistworm.png");
+    background-size: 70px 70px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 5;
+}
+.Fiveridecoo{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url("../Image/Fiveridecoo.png");
+    background-size: 70px 70px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 5;
+}
+.Whatgo{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url("../Image/Whatgo.png");
+    background-size: 70px 70px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 5;
+}
+.Firebear{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url("../Image/Firebear.png");
+    background-size: 70px 70px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 5;
+}
+.Northpolebear{
+    position: absolute;    
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    background-image: url("../Image/Northpolebear.png");
+    background-size: 70px 70px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 5;
+}
+.world{
+    position: absolute;    
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    background-image: url("../Image/grass.png");
+    background-size: 1000px 1000px;
+    cursor: crosshair;
+    z-index: 1;
+}
+.TutorialButton{
+    position: absolute;
+    top: 56vh;
+    left: 46vw;
+    height: 8vh;
+    width: 10vw;
+    border: 5px solid lawngreen;
+    background-color: black;
+    color: lawngreen;
+    font-size: 6vh;
+    z-index: 10;
+}
+.StartButton{
+    position: absolute;
+    top: 65vh;
+    left: 46vw;
+    height: 8vh;
+    width: 10vw;
+    border: 5px solid lawngreen;
+    background-color: black;
+    color: lawngreen;
+    font-size: 6vh;
+    z-index: 10;
+}
+.credits{
+    position: absolute;
+    top: 74vh;
+    left: 46vw;
+    height: 8vh;
+    width: 10vw;
+    border: 5px solid cyan;
+    background-color: black;
+    color: cyan;
+    font-size: 6vh;
+    z-index: 10;
+}
+.popki{
+    position: absolute; 
+    opacity: 1;
+    height: 150px;
+    width: 150px;
+    left: 91vw;
+    top: 79vh;
+    background-color: black;
+    background-image: url("../Image/egg.png");
+    background-size: 150px 150px;
+    color: black;
+    font-size: 50px;
+    cursor: pointer;
+    z-index: 10;
+}
+.egg{
+    position: absolute; 
+    height: 70px;
+    width: 70px;
+    z-index: 10;
+}
+.gold{
+    position: absolute; 
+    opacity: 1;
+    height: 25px;
+    width: 25px;
+    background-color: black;
+    background-image: url("../Image/gold.png");
+    background-size: 25px 25px;
+    color: black;
+    font-size: 50px;
+    cursor: grab;
+    z-index: 4;
+}
+.tree{
+    position: absolute; 
+    opacity: 1;
+    height: 40px;
+    width: 40px;
+    background-color: black;
+    background-image: url("../Image/tree.png");
+    background-size: 40px 40px;
+    color: black;
+    font-size: 50px;
+    cursor: grab;
+    z-index: 4;
+}
+.rock{
+    position: absolute; 
+    opacity: 1;
+    height: 40px;
+    width: 40px;
+    background-color: black;
+    background-image: url("../Image/rock.png");
+    background-size: 40px 40px;
+    color: black;
+    font-size: 50px;
+    cursor: grab;
+    z-index: 4;
+}
+.diamond{
+    position: absolute; 
+    opacity: 1;
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    background-image: url("../Image/diamond.png");
+    background-size: 50px 50px;
+    color: black;
+    font-size: 50px;
+    cursor: grab;
+    z-index: 4;
+}
+.tree_num{
+    position: absolute; 
+    opacity: 1;
+    height: 100px;
+    width: 100px;
+    left: 86vw;
+    top: 0vh;
+    background-color: black;
+    background-image: url("../Image/tree.png");
+    background-size: 100px 100px;
+    color: white;
+    font-size: 25px;
+    z-index: 10;
+}
+.rock_num{
+    position: absolute; 
+    opacity: 1;
+    height: 100px;
+    width: 100px;
+    left: 81vw;
+    top: 0vh;
+    background-color: black;
+    background-image: url("../Image/rock.png");
+    background-size: 100px 100px;
+    color: white;
+    font-size: 25px;
+    z-index: 10;
+}
+.diamond_num{
+    position: absolute; 
+    opacity: 1;
+    height: 100px;
+    width: 100px;
+    left: 76vw;
+    top: 0vh;
+    background-color: black;
+    background-image: url("../Image/diamond.png");
+    background-size: 100px 100px;
+    color: red;
+    font-size: 40px;
+    z-index: 10;
+}
+.money{
+    position: absolute; 
+    opacity: 1;
+    height: 100px;
+    width: 100px;
+    left: 91vw;
+    top: 0vh;
+    background-color: black;
+    background-image: url("../Image/gold.png");
+    background-size: 100px 100px;
+    color: white;
+    font-size: 25px;
+    z-index: 10;
+}
+.techtree{
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    width: 50vw;
+    height: 50vh;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    z-index: 28;
+}
+.iftechtreebutton{
+    position: absolute;
+    top: 0vh;
+    left: 50vw;
+    width: 5vw;
+    height: 5vh;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    font-size: 2vh;
+    z-index: 27;
+    cursor: pointer;
+}
+.techtree_second{
+    position: absolute;
+    top: 50vh;
+    left: 0vw;
+    width: 50vw;
+    height: 48vh;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    z-index: 28;
+}
+.iftechtreebutton_second{
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    width: 5vw;
+    height: 5vh;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    font-size: 2vh;
+    z-index: 27;
+    cursor: pointer;
+}
+.techtree_in_1{
+    position: absolute;
+    top: 17vh;
+    left: 8vw;
+    width: 5vw;
+    height: 5vw;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    font-size: 2vh;
+    z-index: 30;
+    cursor: pointer;
+}
+.techtree_in_2{
+    position: absolute;
+    top: 17vh;
+    left: 16vw;
+    width: 5vw;
+    height: 5vw;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    font-size: 2vh;
+    z-index: 30;
+    cursor: pointer;
+}
+.techtree_in_3{
+    position: absolute;
+    top: 17vh;
+    left: 24vw;
+    width: 5vw;
+    height: 5vw;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    font-size: 2vh;
+    z-index: 30;
+    cursor: pointer;
+}
+.techtree_in_4{
+    position: absolute;
+    top: 17vh;
+    left: 32vw;
+    width: 5vw;
+    height: 5vw;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    font-size: 2vh;
+    z-index: 30;
+    cursor: pointer;
+}
+.techtree_in_5{
+    position: absolute;
+    top: 17vh;
+    left: 40vw;
+    width: 5vw;
+    height: 5vw;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    font-size: 2vh;
+    z-index: 30;
+    cursor: pointer;
+}
+.techtree2_in_1{
+    position: absolute;
+    top: 73vh;
+    left: 15vw;
+    width: 5vw;
+    height: 5vw;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    font-size: 2vh;
+    z-index: 30;
+    cursor: pointer;
+}
+.techtree2_in_2{
+    position: absolute;
+    top: 73vh;
+    left: 30vw;
+    width: 5vw;
+    height: 5vw;
+    background-color: black;
+    border: 5px solid lawngreen;
+    color: lawngreen;
+    font-size: 2vh;
+    z-index: 30;
+    cursor: pointer;
+}
+.start{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    border: 0px;
+    color: white;
+    font-size: 10vh;
+    z-index: 2;
+    background-image: url("../Image/us_okey.png");
+    background-size: 100vw 100vh;
+    cursor: cell;
+}
+.build{
+    position: absolute;
+    top: 5vh;
+    left: 0vw;
+    width: 50vw;
+    height: 50vh;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    z-index: 26;
+}
+.buildbutton{
+    position: absolute;
+    top: 5vh;
+    left: 50vw;
+    width: 5vw;
+    height: 5vh;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    font-size: 2vh;
+    z-index: 25;
+    cursor: pointer;
+}
+.build_what{
+    position: absolute;
+    top: 26vh;
+    left: 21vw;
+    width: 5vw;
+    height: 5vw;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    font-size: 2vh;
+    z-index: 27;
+    cursor: pointer;
+}
+.build_next{
+    position: absolute;
+    top: 40vh;
+    left: 21vw;
+    width: 5vw;
+    height: 2vw;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    font-size: 2vh;
+    z-index: 27;
+    cursor: pointer;
+}
+.enemy{
+    position: absolute;    
+    height: 75px;
+    width: 75px;
+    background-color: black;
+    background-image: url("../Image/Hunter.png");
+    background-size: 75px 75px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 70px 70px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 6;
+}
+.enemy_bow{
+    position: absolute;    
+    height: 85px;
+    width: 85px;
+    background-color: black;
+    background-image: url("../Image/Hunter_Bow.png");
+    background-size: 85px 85px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 80px 80px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 6;
+}
+.TheRifleHunter{
+    position: absolute;    
+    height: 110px;
+    width: 110px;
+    background-color: black;
+    background-image: url("../Image/Hunter_Rifle.png");
+    background-size: 110px 110px;
+    color: white;
+    font-size: 20px;
+    padding: 0px 105px 105px 0px;
+    text-align: left;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 6;
+}
+.nobuild{
+    position: absolute; 
+    opacity: 1;
+    height: 100px;
+    width: 100px;
+    left: 0px;
+    top: 0px;
+    background-color: black;
+    border: 5px solid red;
+    color: red;
+    font-size: 25px;
+    z-index: 100;
+    cursor: pointer;
+}
+.time{
+    position: absolute;
+    top: 0vh;
+    left: 50vw;
+    width: 10vw;
+    height: 10vh;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    font-size: 2.2vh;
+    z-index: 26;
+}
+.timebutton{
+    position: absolute;
+    top: 0vh;
+    left: 50vw;
+    width: 5vw;
+    height: 5vh;
+    background-color: black;
+    border: 5px solid cyan;
+    color: cyan;
+    font-size: 2vh;
+    z-index: 25;
+    cursor: pointer;
+}
+.died{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    background-image: url("../Image/died.png");
+    background-size: 100vw 100vh;
+    color: white;
+    font-size: 10vh;
+    z-index: 100;
+    cursor: grab;
+}
+.noi{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 1000;
+    cursor: pointer;
+}
+.span{
+    position: absolute;
+     top: 0vh; 
+     left: 0vw; 
+     color: white; 
+     font-size: 2vh;
+}
