@@ -1320,10 +1320,12 @@ window.addEventListener('DOMContentLoaded',()=>{
         all[i].hp+=build_thing[ii].cheeryo
     }
     function cheeryo_player(){
-        while (all.length>=cheeryo_player_bool.length)
-        if (all.length>cheeryo_player_bool.length){
-            cheeryo_player_bool.push(true)
+        while (all.length>cheeryo_player_bool.length){
+            if (all.length>cheeryo_player_bool.length){
+                cheeryo_player_bool.push(true)
+            }
         }
+        
         for (var i=0;i<all.length;i++){
             for (var ii=0;ii<build_thing.length;ii++){
                 if (wheels.indexOf(build_thing[ii].id)>16){
