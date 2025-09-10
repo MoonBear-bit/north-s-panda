@@ -1,7 +1,6 @@
 let TutorialButton=document.getElementById('tutorialbutton')
 let StartButton=document.getElementById('Starter');
 let startimg=document.getElementById('startimg');
-let credits=document.getElementById('credits')
 let popki=document.getElementById('popki');
 let grass=document.getElementById('world');
 let golder=document.getElementById('money');
@@ -28,9 +27,6 @@ let time=document.getElementById('time')
 let timebutton=document.getElementById('timebutton')
 let diedimg=document.getElementById('died')
 let noi=document.getElementById('noi')
-document.querySelectorAll('.span').forEach(el=>{
-el.style.display='none';
-});
 let ifhit=true
 let ifhit_2=true
 let ifhit_3=true
@@ -38,24 +34,6 @@ let gold=0;
 let tree=0;
 let rock=0;
 let diamond=0;
-let opening=new Audio("Sound/North's panda.mp3");
-let goldsound=new Audio('Sound/gold.mp3')
-let eggsound=new Audio('Sound/egg.mp3')
-let treesound=new Audio('Sound/tree.mp3')
-let rocksound=new Audio('Sound/rock.mp3')
-let diamondsound=new Audio('Sound/diamond.mp3')
-let start=new Audio('Sound/system start.mp3')
-let music=new Audio('Sound/dark.mp3')
-let credits_music=new Audio('Sound/main.mp3')
-let war_music=new Audio('Sound/war.mp3')
-let scream=new Audio('Sound/scream.mp3')
-let damage=new Audio('Sound/damage.mp3')
-let damage_time=new Audio('Sound/damage.mp3')
-let damage_build=new Audio('Sound/damage.mp3')
-let diedsound=new Audio('Sound/died.mp3')
-let opener=new Audio('Sound/opener.mp3')
-let cancelsound=new Audio('Sound/cancel.mp3')
-let clicksound=new Audio('Sound/click.mp3')
 let ifstart=false;
 let ifcredits=false;
 let money=0;
@@ -640,15 +618,11 @@ nobuild.style.display='none'
 time.style.display='none'
 timebutton.style.display='none'
 diedimg.style.display='none'
-music.volume=0.8
-credits_music.volume=0.3
-war_music.volume=0.5
 async function wait(timeout){
     await new Promise(resolve=>setTimeout(resolve(),timeout));
 }
 noi.addEventListener('click',()=>{
     noi.style.display='none'
-    opener.play()
 })
 function starttutorial(){
     alert('이 게임은 "북쪽의 푸바오"이며 오랜 역사를 거쳐 내려왔습니다.')
@@ -682,14 +656,10 @@ function starttutorial(){
     alert('[치료]:치료 건축물을 건설합니다. 그리고 아군을 그 안으로 들여보냅니다. 계속 그 안에 있는 한, HP가 10이 되기 전까지 5초마다 HP를 회복합니다.')
     alert('[도박]:개발중...')
 }
-opener.addEventListener('ended',()=>{
-    opener.play()
-})
 function update(){
     if (ifstart){
         StartButton.style.display='none';
         TutorialButton.style.display='none';
-        credits.style.display='none';
         startimg.style.display='none'
         create(entity[4]);
         popki.style.display='block'
@@ -705,53 +675,38 @@ function update(){
         tree_make();
         rock_make();
         diamond_make();
-    }else if(ifcredits){
-        StartButton.style.display='none';
-        TutorialButton.style.display='none';
-        credits.style.display='none';
-        startimg.style.display='none'
-        start_credits();
     }else{
         StartButton.style.display='block';
         TutorialButton.style.display='block';
-        credits.style.display='block';
     }
 }
 update();
 iftechtreebutton.addEventListener('click',()=>{
     if (techtree.style.display=='block'){
         techtree.style.display='none'
-        clicksound.play()
     }else{
         techtree.style.display='block'
-        clicksound.play()
     }
 });
 iftechtreebutton_second.addEventListener('click',()=>{
     if (techtree_second.style.display=='block'){
         techtree_second.style.display='none'
-        clicksound.play()
     }else{
         techtree_second.style.display='block'
-        clicksound.play()
     }
 });
 buildbutton.addEventListener('click',()=>{
     if (build.style.display=='block'){
         build.style.display='none'
-        clicksound.play()
     }else{
         build.style.display='block'
-        clicksound.play()
     }
 });
 timebutton.addEventListener('click',()=>{
     if (time.style.display=='block'){
         time.style.display='none'
-        clicksound.play()
     }else{
         time.style.display='block'
-        clicksound.play()
     }
 });
 let war_num=1
@@ -775,7 +730,6 @@ function create_enemy(n,nhp,npower,nspeed){
                 if (ifcandie_enemy){
                     ifcandie_enemy=false
                     creater.hp-=all[i].power
-                    scream.play()
                     setTimeout(()=>{
                         ifcandie_enemy=true
                     },1);
@@ -805,7 +759,6 @@ function create_bow_enemy(n,nhp,npower){
                 if (ifcandie_enemy){
                     ifcandie_enemy=false
                     creater.hp-=all[i].power
-                    scream.play()
                     setTimeout(()=>{
                         ifcandie_enemy=true
                     },1);
@@ -835,7 +788,6 @@ function create_boss_enemy_TheRifleHunter(n,nhp,npower,nspeed){
                 if (ifcandie_enemy){
                     ifcandie_enemy=false
                     creater.hp-=all[i].power
-                    scream.play()
                     setTimeout(()=>{
                         ifcandie_enemy=true
                     },1);
@@ -904,12 +856,6 @@ function the_first_war(){
         create_enemy(warman_num,3,1,1)
     }
     ifwar=true
-    music.pause()
-    music.currentTime=0
-    war_music.play()
-    war_music.addEventListener('ended',()=>{
-        war_music.play()
-    })
 }
 function startwar(){
     war_num=0
@@ -920,32 +866,18 @@ function startwar(){
 }
 war_num=0
 StartButton.addEventListener('click',()=>{
-    clicksound.play()
     ifstart=true;
-    opener.pause()
-    music.play();
     update();
     startwar()
 });
 TutorialButton.addEventListener('click',()=>{
-    clicksound.play()
     ifstart=true;
-    opener.pause()
-    music.play();
     update();
     startwar()
     setTimeout(()=>{
         starttutorial()
     },10);
 });
-credits.addEventListener('click',()=>{
-    ifcredits=true;
-    update();
-    opener.pause()
-})
-music.addEventListener('ended',()=>{
-    music.play();
-})
 function __random__(){
     let random=Math.random();
     console.log(random);
@@ -1019,7 +951,6 @@ function create_gold(){
         golds[golds.length-1].addEventListener('click',()=>{
             for (var i=0;i<all.length;i++){
                 if (math(all[i],creategold)<200){
-                    goldsound.play();
                     creategold.remove();
                     golds.splice(0,1)
                     gold+=1;
@@ -1047,7 +978,6 @@ function create_tree(){
         trees[trees.length-1].addEventListener('click',()=>{
             for (var i=0;i<all.length;i++){
                 if (math(all[i],createtree)<200){
-                    treesound.play();
                     createtree.remove();
                     trees.splice(0,1)
                     tree+=1;
@@ -1076,7 +1006,6 @@ function create_rock(){
         rocks[rocks.length-1].addEventListener('click',()=>{
             for (var i=0;i<all.length;i++){
                 if (math(all[i],createrock)<200){
-                    rocksound.play();
                     createrock.remove();
                     rocks.splice(0,1)
                     rock+=1;
@@ -1105,7 +1034,6 @@ function create_diamond(){
         diamonds[diamonds.length-1].addEventListener('click',()=>{
             for (var i=0;i<all.length;i++){
                 if (math(all[i],creatediamond)<200){
-                    diamondsound.play();
                     creatediamond.remove();
                     diamonds.splice(0,1)
                     diamond+=1;
@@ -1195,9 +1123,6 @@ popki.addEventListener('click',()=>{
     if (gold>=need_money){
         gold-=need_money;
         create(entity[__random__()]);
-        clicksound.play()
-    }else{
-        cancelsound.play()
     }
 });
 function move(i__,xxy,yyx,n_){
@@ -1214,19 +1139,6 @@ function move(i__,xxy,yyx,n_){
         }
     }
 }
-damage.addEventListener('ended',()=>{
-    ifhit=true;
-});
-damage_time.addEventListener('ended',()=>{
-    setTimeout(() => {
-        ifhit_2=true
-    }, 100);
-})
-damage_build.addEventListener('ended',()=>{
-    setTimeout(() => {
-        ifhit_3=true
-    }, 100);
-})
 function set(){
     setTimeout(() => {
         if (until_time>0){
@@ -1237,10 +1149,6 @@ function set(){
 }
 set()
 function died(){
-    diedsound.play()
-    diedsound.addEventListener('ended',()=>{
-        diedsound.play();
-    });
     diedimg.style.display='block'
 }
 function moveEnemy(enemys){
@@ -1292,7 +1200,6 @@ function moveEnemy(enemys){
                 }else{
                     if(ifhit_3){
                         build_thing[what_the_small].hp-=enemys[i].power
-                        damage_build.play()
                         ifhit_3=false
                     }
                 }
@@ -1303,9 +1210,6 @@ function moveEnemy(enemys){
 function whatdied(){
     if (all.length==0 && ifstart){
         ifstart=false
-        war_music.pause()
-        music.pause()
-        credits_music.pause()
         died()
     }
 }
@@ -1376,7 +1280,6 @@ function roof_thing(){
         for (var ii=0;ii<enemy.length;ii++){
             if (math(all[i],enemy[ii])<enemy[ii].sagury && ifhit){
                 all[i].hp-=enemy[ii].power
-                damage.play()
                 ifhit=false
             }
         }
@@ -1385,7 +1288,6 @@ function roof_thing(){
         for (var ii=0;ii<enemy.length;ii++){
             if (math(build_thing[i],enemy[ii])<enemy[ii].sagury && ifhit_3){
                 build_thing[i].hp-=enemy[ii].power
-                damage_build.play()
                 ifhit_3=false
             }
         }
@@ -1394,7 +1296,6 @@ function roof_thing(){
         for (var ii=0;ii<enemy.length;ii++){
             if (math(build_thing[i],enemy[ii])<build_thing[i].sagury && ifhit_2){
                 enemy[ii].hp-=build_thing[i].power
-                damage_time.play()
                 ifhit_2=false
             }
         }
@@ -1471,9 +1372,6 @@ function blockandnone(){
 function yee(){
     if (warman_num<1 && war_num && until_time==0){
         ifwar=false
-        music.play()
-        war_music.pause()
-        war_music.currentTime=0
         switch (war_num) {
             case 1:
                 the_second_war();
@@ -1512,16 +1410,6 @@ function yee(){
     requestAnimationFrame(yee);
 }
 yee();
-function start_credits(){
-    credits_music.play();
-    grass.style.display='none'
-    document.querySelectorAll('[id="span"]').forEach(el => {
-        el.style.display = 'block';
-    });
-    credits_music.addEventListener('ended',()=>{
-        credits_music.play()
-    })
-}
 function build_what_move(){
     if (build_what.textContent=='null'){
         build_what.textContent=wheels[0]
@@ -1631,56 +1519,41 @@ function build_what_move(){
 techtree_in_1.addEventListener('click',()=>{
     if (diamond>need_diamond[0]-1 && house_what<5){
         house_what+=1
-        diamondsound.play()
         diamond-=need_diamond[0]
         need_diamond[0]=need_diamond[0]*3
         house[house_[house_what-1]]=true
-    }else{
-        cancelsound.play()
     }
 });
 techtree_in_2.addEventListener('click',()=>{
     if (diamond>need_diamond[1]-1 && yosae_what<5){
         yosae_what+=1
-        diamondsound.play()
         diamond-=need_diamond[1]
         need_diamond[1]=need_diamond[1]*3
         yosae[yosae_[yosae_what-1]]=true
-    }else{
-        cancelsound.play()
     }
 });
 techtree_in_3.addEventListener('click',()=>{
     if (diamond>need_diamond[2]-1 && sangsan_what<4){
         sangsan_what+=1
-        diamondsound.play()
         diamond-=need_diamond[2]
         need_diamond[2]=need_diamond[2]*3
         sangsan[sangsan_[sangsan_what-1]]=true
-    }else{
-        cancelsound.play()
     }
 });
 techtree_in_4.addEventListener('click',()=>{
     if (diamond>need_diamond[3]-1 && doback_what<3){
         doback_what+=1
-        diamondsound.play()
         diamond-=need_diamond[3]
         need_diamond[3]=need_diamond[3]*3
         doback[doback_[doback_what-1]]=true
-    }else{
-        cancelsound.play()
     }
 });
 techtree_in_5.addEventListener('click',()=>{
     if (diamond>need_diamond[4]-1 && cheeryo_what<4){
         cheeryo_what+=1
-        diamondsound.play()
         diamond-=need_diamond[4]
         need_diamond[4]=need_diamond[4]*3
         cheeryo[cheeryo_[cheeryo_what-1]]=true
-    }else{
-        cancelsound.play()
     }
 });
 build_what.addEventListener('mouseenter',()=>{
@@ -1692,12 +1565,10 @@ build_what.addEventListener('mouseleave',()=>{
 build_what.addEventListener('wheel',()=>{
     if (ifmouseinthebuildwhat){
         build_what_move()
-        clicksound.play()
     }
 });
 build_next.addEventListener('click',()=>{
     build_what_move()
-    clicksound.play()
 })
 let iffirstbuild=true
 build_what.addEventListener('click',()=>{
@@ -1705,29 +1576,23 @@ build_what.addEventListener('click',()=>{
         doback[build_what.textContent] | cheeryo[build_what.textContent]){
         build.style.display='none'
         buildbutton.style.left='0vw'
-        clicksound.play()
         if (iffirstbuild){
             alert('Click to build. Right click to cancel.')
             iffirstbuild=false
         }
         nobuild.style.display='block'
         ifbuild=true
-    }else{
-        cancelsound.play()
     }
-    
 });
 grass.addEventListener('click',(event)=>{
     if (ifbuild){
         thebuild()
         ifbuild=false;
-        clicksound.play()
     }
 });
 nobuild.addEventListener('click',()=>{
     ifbuild=false
     nobuild.style.display='none'
-    cancelsound.play()
 })
 function thebuild(){
     var createrbuild=build_what.textContent;

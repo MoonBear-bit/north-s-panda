@@ -160,18 +160,6 @@ body{
     font-size: 6vh;
     z-index: 10;
 }
-.credits{
-    position: absolute;
-    top: 74vh;
-    left: 46vw;
-    height: 8vh;
-    width: 10vw;
-    border: 5px solid cyan;
-    background-color: black;
-    color: cyan;
-    font-size: 6vh;
-    z-index: 10;
-}
 .popki{
     position: absolute; 
     opacity: 1;
@@ -612,11 +600,4 @@ body{
     background-color: black;
     z-index: 1000;
     cursor: pointer;
-}
-.span{
-    position: absolute;
-     top: 0vh; 
-     left: 0vw; 
-     color: white; 
-     font-size: 2vh;
 }
